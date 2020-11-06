@@ -17,21 +17,27 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from django.contrib import admin
+from django.contrib.auth.views import LogoutView
 from django.urls import path, include
 from django.views.generic import TemplateView
 
-from .views import home_page, about_page, contact_page, login_page, register_page
+from accounts.views import login_page, register_page, guest_register_view
+from addresses.views import checkout_address_create_view
+from .views import home_page, about_page, contact_page
 
 urlpatterns = [
                   path(r'', home_page, name='home'),
                   path(r'about/', about_page),
                   path(r'contact/', contact_page, name='contact'),
                   path(r'login/', login_page, name='login'),
+                  path(r'logout/', LogoutView.as_view(), name='logout'),
                   path(r'register/', register_page, name='register'),
+                  path(r'register/guest/', guest_register_view, name='guest_register'),
                   # 부트스트랩 !
                   path(r'bootstrap/', TemplateView.as_view(template_name='bootstrap/example.html')),
                   path(r'products/', include('products.urls'), name='search'),
                   path(r'cart/', include('carts.urls'), name='cart'),
+                  path(r'checkout_address_create_view/', checkout_address_create_view, name='checkout_address_create_view'),
                   path('search/', include('search.urls'), name='search'),
                   path('admin/', admin.site.urls),
 
