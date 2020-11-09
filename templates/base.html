@@ -27,7 +27,8 @@
             event.preventDefault();
             console.log("form is not sending");
             let thisForm = $(this);
-            let actionEndpoint = thisForm.attr('action');
+            //let actionEndpoint = thisForm.attr('action');
+            let actionEndpoint = thisForm.attr('data-endpoint')
             let httpMethod = thisForm.attr('method');
             let formData = thisForm.serialize();
 
@@ -45,13 +46,54 @@
                         submitSpan.html(' <button type="submit" class="btn btn-success">Add to Cart</button>')
                     }
                     let navbarCount = $(".navbar-cart-count")
-                    navbarCount.text(data['cartItemCount']);
+
+                    if (data['cartItemCount'] < 1) {
+                        navbarCount.css("display", "none");
+                    } else {
+                        navbarCount.css("display", "contents");
+                        navbarCount.text(data.cartItemCount);
+                    }
+
+                    let currentPath = window.location.href;
+                    if (currentPath.indexOf("cart") !== -1) {
+                        refreshCart();
+                    }
+
+
                 },
                 error: function (errorData) {
                     console.log("error");
                     console.log(errorData);
                 }
-            })
+            });
+
+            function refreshCart() {
+                console.log("in current Cart")
+                let cartTable = $(".cart-table")
+                let cartBody = cartTable.find(".cart-body")
+
+                let productRows = cartBody.find(".cart-product")
+
+                let refreshCartUrl = '/api/cart';
+                let refreshCartMethod = "GET";
+                let data = {};
+                $.ajax({
+                    url: refreshCartUrl,
+                    method: refreshCartMethod,
+                    data: data,
+                    success: function (data) {
+                        console.log("success");
+                        console.log(data);
+                        productRows.html("<tr><td colspan=3>Coming Soon</td></tr>")
+                        cartBody.find(".cart-subtotal").text(data.subtotal)
+                        cartBody.find(".cart-total").text(data.total)
+                    },
+                    error: function (errorData) {
+                        window.location.href = currentUrl;
+                    }
+
+                })
+            }
 
 
         });

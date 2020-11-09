@@ -45,10 +45,14 @@
                 {% endif %}
                 <li class="nav-item {% if request.path == cart_url %} active {% endif %}">
                     <a class="nav-link" href="{{ cart_url }}">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         {% if request.session.cart_items > 0 %}
-                            <span class='navbar-cart-count' style="color:red; font-weight: bold;">{{ request.session.cart_items }}</span>
+                            <span class='navbar-cart-count'
+                                  style="color:red; font-weight: bold;">{{ request.session.cart_items }}</span>
+                        {% else %}
+                            <span class='navbar-cart-count' style="color:red; font-weight: bold;"></span>
                         {% endif %}
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    </a>
                 </li>
 
                 {#                <li class="nav-item dropdown">#}
