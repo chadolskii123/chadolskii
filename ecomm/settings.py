@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = '8h0$q!s_7scv&d0sptxza-6t*=r_ktr8u$6hh662g=jmc4(h4h'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -43,14 +41,17 @@ INSTALLED_APPS = [
     # our apps!
     'addresses',
     'accounts',
+    'analytics',
     'billing',
     'carts',
     'orders',
     'products',
     'search',
     'tags',
+
 ]
 
+AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -78,7 +79,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
-                 # 미디어 파일 불러올 수 있도록 해주는 context_processors 활성화 후 {{ MEDIA_URL }}로 불러오기 쌉가능
+                # 미디어 파일 불러올 수 있도록 해주는 context_processors 활성화 후 {{ MEDIA_URL }}로 불러오기 쌉가능
                 'django.template.context_processors.media',
             ],
         },
@@ -86,7 +87,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ecomm.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -97,7 +97,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -117,7 +116,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -130,7 +128,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/

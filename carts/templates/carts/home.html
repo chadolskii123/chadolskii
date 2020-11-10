@@ -14,9 +14,10 @@
             <tbody class="cart-body">
             {% for product in cart.products.all %}
                 <tr class="cart-product">
-                    <td scope="row">{{ forloop.counter }}</td>
+                    <th scope="row">{{ forloop.counter }}</th>
                     <td><a href="{{ product.get_absolute_url }}">{{ product.title }}</a>
-                         {% include 'products/snippets/update_cart.html' with product=product in_cart=True %}
+                      {% include 'carts/snippets/remove_product.html' with product=product %}
+{#                        {% include 'products/snippets/update_cart.html' with product=product in_cart=True %}#}
                     </td>
                     <td>{{ product.price }}</td>
                 </tr>
@@ -35,6 +36,10 @@
             </tr>
             </tbody>
         </table>
+
+        <div class="cart-item-remove-form" style="display:none;">
+            {% include 'carts/snippets/remove_product.html' %}
+        </div>
     {% else %}
         <p class="lead">Cart is empty</p>
     {% endif %}

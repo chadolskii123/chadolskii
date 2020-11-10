@@ -1,0 +1,100 @@
+[
+{
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+        "title": "hat",
+        "slug": "hat",
+        "description": "hat",
+        "price": "39.99",
+        "image": "1817159133/1817159133.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2020-11-02T02:05:54.472Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+        "title": "shirt",
+        "slug": "shirt",
+        "description": "shirt",
+        "price": "39.99",
+        "image": "1605446004/1605446004.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2020-11-02T02:06:14.516Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+        "title": "Hat",
+        "slug": "hat-g94y",
+        "description": "Hattttt",
+        "price": "39.99",
+        "image": "1192712654/1192712654.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2020-11-02T06:43:20.464Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+        "title": "Shirttttt",
+        "slug": "shirttttt",
+        "description": "Shirtsssssss",
+        "price": "39.99",
+        "image": "3167414041/3167414041.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2020-11-02T06:43:31.294Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+        "title": "TTTT",
+        "slug": "tttt",
+        "description": "TTTTTT",
+        "price": "39.99",
+        "image": "1575686777/1575686777.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2020-11-02T06:46:40.152Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+        "title": "SSSSSSSS",
+        "slug": "ssssssss",
+        "description": "SSSSSSSSS",
+        "price": "39.99",
+        "image": "1596769619/1596769619.jpg",
+        "featured": false,
+        "active": true,
+        "timestamp": "2020-11-02T06:47:35.252Z"
+    }
+},
+{
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+        "title": "7789",
+        "slug": "7789",
+        "description": "7789",
+        "price": "39.99",
+        "image": "",
+        "featured": false,
+        "active": true,
+        "timestamp": "2020-11-06T00:51:03.939Z"
+    }
+}
+]
