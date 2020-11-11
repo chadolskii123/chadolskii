@@ -78,6 +78,7 @@ $(document).ready(function () {
             hiddenInput.setAttribute('value', token.id);
             form.appendChild(hiddenInput);
             */
+
             let paymentMethodEndpoint = '/billing/payment_method/create/'
             let data = {
                 'token': token.id,

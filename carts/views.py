@@ -90,13 +90,17 @@ def checkout_home(request):
         if billing_address_id or shipping_address_id:
             order_obj.save()
     if request.method == "POST":
-        is_done = order_obj.check_done()
-        if is_done:
-            order_obj.mark_paid()
-            request.session['cart_items'] = 0
-            del request.session['cart_id']
-            return redirect('cart:success')
-
+        is_prepared = order_obj.check_done()
+        if is_prepared:
+            did_charge, crg_msg = billing_profile.charge(order_obj)
+            if did_charge :
+                order_obj.mark_paid()
+                request.session['cart_items'] = 0
+                del request.session['cart_id']
+                return redirect('cart:success')
+            else:
+                print(crg_msg)
+                redirect("cart:checkout")
     '''
     update order_obj to done or 'paid'
     del request.session['cart_id']
