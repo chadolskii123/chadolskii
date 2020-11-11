@@ -10,12 +10,19 @@
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
 
+{# Stripe JS #}
+<script src="https://js.stripe.com/v3/"></script>
+
 <!-- jQuery confirm js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-
+{# js Render #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.8/jsrender.js" integrity="sha512-ZLg3KNxsqi7wZcBFRyplttGMfBVyvSx6fyNbF0+G+sC5EEtCx0EB/oBCuB/m3nRr31iPX/6jQYD1WE5CtHNP1g==" crossorigin="anonymous"></script>
+{% include "base/js_templates.html" %}
 {# Django Secure AJAX JS#}
 <script src="{% static 'js/csrf_ajax.js' %}"></script>
 
-
 {# eCommerce Custom JS! #}
 <script src="{% static 'js/ecommerce.js' %}"></script>
+
+{# eCommerce Main JS! #}
+<script src="{% static 'js/ecommerce.main.js' %}"></script>
