@@ -1,4 +1,4 @@
-from .base import *
+#from .base import *
 
 from .production import *
 
@@ -6,7 +6,7 @@ from .production import *
 # Debug가 False로 되어있어야만 프로덕션에서 사용 할 수 있기 때문에
 # 실제 운영 서버에서는 local셋팅이 import되지 않음
 
-try:
-    from .local import *
-except:
-    pass
+# try:
+#     from .local import *
+# except:
+#     pass
