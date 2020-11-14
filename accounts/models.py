@@ -11,7 +11,7 @@ class UserManager(BaseUserManager):
         if not password:
             raise ValueError("Users must have an password")
         user_obj = self.model(
-            email=self.normalize_email(email)  # built in mehotd in BaseUsermanager
+            email=self.normalize_email(email)  # built in method in BaseUsermanager
         )
         user_obj.set_password(password)  # change user password
         user_obj.staff = is_staff

@@ -42,16 +42,15 @@ def maketing_pref_update_receiver(sender, instance, *args, **kwargs):
         else:
             response_data = Mailchimp().unsubscribe(instance.user.email)
 
-        print(response_data['status'])
-
-        if response_data['status'] == 'subscribed':
-            instance.subscribed = True
-            instance.mailchimp_subscribed = True
-            instance.mailchimp_msg = response_data
-        else:
-            instance.subscribed = False
-            instance.mailchimp_subscribed = False
-            instance.mailchimp_msg = response_data
+        if response_data:
+            if response_data['status'] == 'subscribed':
+                instance.subscribed = True
+                instance.mailchimp_subscribed = True
+                instance.mailchimp_msg = response_data
+            else:
+                instance.subscribed = False
+                instance.mailchimp_subscribed = False
+                instance.mailchimp_msg = response_data
 
 
 pre_save.connect(maketing_pref_update_receiver, sender=MarketingPreference)

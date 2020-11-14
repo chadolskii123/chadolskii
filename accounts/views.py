@@ -28,7 +28,7 @@ def guest_register_view(request):
         if is_safe_url(redirect_path, request.get_host()):
             return redirect(redirect_path)
         else:
-            redirect("/register/")
+            redirect("/login/")
     return redirect("/register/")
 
 

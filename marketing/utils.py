@@ -50,13 +50,12 @@ class Mailchimp(object):
             current_status = self.check_subscription_status(email)
             data = {
                 "email_address": email,
-                "status_if_new": "subscribed",
                 "status": status
             }
-            if current_status:
+            if current_status is not None:
                 r = self.client.lists.update_list_member(self.list_id, email, data)
             else:
-                r = self.client.lists.add_list_member(self.list_id, email)
+                r = self.client.lists.add_list_member(self.list_id, data)
             return r
         except ValueError:
             return "Not Valid Email Address"
@@ -71,3 +70,7 @@ class Mailchimp(object):
 
     def pending(self, email):
         return self.add_or_update_email(email, status="pending")
+
+
+m = Mailchimp()
+m.add_or_update_email("rigust@naver.com")
