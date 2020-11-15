@@ -36,7 +36,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Python ecomm <chadolskii123@gmail.com>'
 
 MANAGERS = (
-    ("chadolskii123@gmail.com", "Chadolskii"),
+    ("Chadolskii", "chadolskii123@gmail.com"),
 )
 ADMIN = MANAGERS
 

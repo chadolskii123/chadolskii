@@ -25,7 +25,7 @@ SECRET_KEY = '8h0$q!s_7scv&d0sptxza-6t*=r_ktr8u$6hh662g=jmc4(h4h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com',]
+ALLOWED_HOSTS = ['.herokuapp.com', ]
 
 # Gmail SMTP settings
 EMAIL_HOST = 'smtp.gmail.com'
@@ -36,7 +36,7 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Python ecomm <chadolskii123@gmail.com>'
 
 MANAGERS = (
-    ("chadolskii123@gmail.com", "Chadolskii"),
+    ("Chadolskii", "chadolskii123@gmail.com"),
 )
 ADMIN = MANAGERS
 
