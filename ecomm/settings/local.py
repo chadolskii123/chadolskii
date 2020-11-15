@@ -27,6 +27,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Gmail SMTP settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'chadolskii123@gmail.com'
+EMAIL_HOST_PASSWORD = 'ckduddnrC8!'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Python ecomm <chadolskii123@gmail.com>'
+
+MANAGERS = (
+    ("chadolskii123@gmail.com", "Chadolskii"),
+)
+ADMIN = MANAGERS
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',

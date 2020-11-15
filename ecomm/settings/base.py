@@ -27,6 +27,19 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Gmail SMTP settings
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'chadolskii123@gmail.com'
+EMAIL_HOST_PASSWORD = 'ckduddnrC8!'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Python ecomm <chadolskii123@gmail.com>'
+
+MANAGERS = (
+    ("chadolskii123@gmail.com", "Chadolskii"),
+)
+ADMIN = MANAGERS
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -169,7 +182,7 @@ SECURE_HSTS_SECONDS = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_FRAME_DENY = False
 
-AWS_GROUPNAME="Chadolskii_ecomm_group"
+AWS_GROUPNAME = "Chadolskii_ecomm_group"
 AWS_USERNAME = "chadolskii-ecomm-user"
 AWS_ACCESS_KEY_ID = "AKIA2WVZDJELZWFVYXV3"
 AWS_SECRET_KEY_ID = "wsE1QvFkWSoz+gPWv+fPLv0gIVE9iHxKVK1ipIel"
