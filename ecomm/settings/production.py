@@ -25,7 +25,7 @@ SECRET_KEY = '8h0$q!s_7scv&d0sptxza-6t*=r_ktr8u$6hh662g=jmc4(h4h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['chadolskii-ecomm.herokuapp.com',]
+ALLOWED_HOSTS = ['.herokuapp.com',]
 
 # Application definition
 INSTALLED_APPS = [
