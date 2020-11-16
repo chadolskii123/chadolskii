@@ -1,0 +1,11 @@
+    Hello,
+
+    Please activate your account for {{ email }} by click the link below :
+
+    {{path}}
+
+    One you activate, you can login.
+
+    Thank you,
+
+    - Python Ecomm -

@@ -70,6 +70,10 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
 
+LOGIN_URL = '/login/'
+LOGIN_URL_REDIRECT = '/'
+LOGOUT_URL_REDIRECT = '/logout/'
+
 MAILCHIMP_API_KEY = "c3727fd5ee87761ea62e6e629bf63558-us2"
 MAILCHIMP_DATA_CENTER = "us2"
 MAILCHIMP_EMAIL_LIST_ID = "c35d4fd9fa"

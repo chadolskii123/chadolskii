@@ -27,18 +27,16 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Gmail SMTP settings
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'chadolskii123@gmail.com'
-EMAIL_HOST_PASSWORD = 'ckduddnrC8!'
-EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Python ecomm <chadolskii123@gmail.com>'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'chadolskii123@gmail.com'  # ex) bum752@gmail.com
+EMAIL_HOST_PASSWORD = 'ckduddnrC8@'  # ex) P@ssw0rd
+SERVER_EMAIL = 'chadolskii123@gmail.com'  # ex) bum752@gmail.com
+DEFAULT_FROM_MAIL = 'chadolskii123'  # ex) bum752
 
-MANAGERS = (
-    ("Chadolskii", "chadolskii123@gmail.com"),
-)
-ADMIN = MANAGERS
+BASE_URL = "127.0.0.1:8000"
 
 # Application definition
 INSTALLED_APPS = [
@@ -69,6 +67,10 @@ INSTALLED_APPS = [
 ]
 
 AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
+
+LOGIN_URL = '/login/'
+LOGIN_URL_REDIRECT = '/'
+LOGOUT_URL_REDIRECT = '/logout/'
 
 MAILCHIMP_API_KEY = "c3727fd5ee87761ea62e6e629bf63558-us2"
 MAILCHIMP_DATA_CENTER = "us2"

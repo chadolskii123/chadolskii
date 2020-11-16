@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.urls import path, include
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 from accounts.views import guest_register_view, RegisterView, LoginView
 from addresses.views import checkout_address_create_view, checkout_address_reuse_view
@@ -30,7 +30,7 @@ from .views import home_page, about_page, contact_page
 
 urlpatterns = [
                   path(r'', home_page, name='home'),
-                  path(r'about/', about_page),
+                  path(r'about/', about_page, name='about'),
                   path(r'contact/', contact_page, name='contact'),
                   path(r'login/', LoginView.as_view(), name='login'),
                   path(r'logout/', LogoutView.as_view(), name='logout'),
@@ -40,6 +40,9 @@ urlpatterns = [
                   path(r'bootstrap/', TemplateView.as_view(template_name='bootstrap/example.html')),
                   path(r'products/', include('products.urls'), name='search'),
                   path(r'cart/', include('carts.urls'), name='cart'),
+                  #path(r'accounts/', RedirectView.as_view(url='/account')),
+                  path(r'account/', include('accounts.urls'), name='accounts'),
+                  path(r'accounts/', include('accounts.passwords.urls')),
                   path(r'api/cart/', cart_detail_api_view, name='api_cart'),
                   path(r'checkout_address_create_view/', checkout_address_create_view,
                        name='checkout_address_create'),
@@ -48,6 +51,7 @@ urlpatterns = [
                   path('billing/payment_method/', payment_method_view, name='billing-payment-method'),
                   path('billing/payment_method/create/', payment_method_createview, name='billing-payment-method-api'),
                   path('search/', include('search.urls'), name='search'),
+                  path('settings/', RedirectView.as_view(url='/account')),
                   path('settings/email/', MarketingPreferenceUpdateView.as_view(), name='marketing-pref'),
                   path('webhooks/mailchimp/', MailchimpWebhookView.as_view(), name='webhooks-mailchimp'),
 
