@@ -174,7 +174,7 @@ class EmailActivation(models.Model):
             if self.key:
                 base_url = getattr(settings, 'BASE_URL', '')[:-1]
                 key_path = reverse("accounts:email_activate", kwargs={'key': self.key})
-                path = f"{base_url}{key_path}"
+                path = f"https://{base_url}{key_path}"
                 context = {
                     'path': path,
                     'email': self.user.email
