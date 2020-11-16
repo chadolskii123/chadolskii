@@ -13,8 +13,9 @@ from django.utils.http import is_safe_url
 from django.utils.safestring import mark_safe
 from django.views.generic import CreateView, FormView, DetailView
 from django.views.generic.base import View
+from django.views.generic.edit import FormMixin
 
-from accounts.forms import LoginForm, RegisterForm, GuestForm
+from accounts.forms import LoginForm, RegisterForm, GuestForm, ReactivateEmailForm
 from accounts.models import GuestEmail, EmailActivation
 from accounts.signals import user_logged_in
 
@@ -32,29 +33,56 @@ class AccountHomeView(LoginRequiredMixin, DetailView):
         return self.request.user
 
 
-class AccountEmailActivateView(View):
-    def get(self, request, key, *args, **kwargs):
-        qs = EmailActivation.objects.filter(key__iexact=key)
-        confirm_qs = qs.confirmable()
-        if confirm_qs.count() == 1:
-            obj = confirm_qs.first()
-            obj.activate()
-            messages.success(request, "Your email has been confirmed. Please login.")
-            return redirect("login")
-        else:
-            activate_qs = qs.filter(activated=True)
-            if activate_qs.exists():
-                reset_link = reverse("password_reset")
-                msg = f"""Your email has already been confirmed
-                Do you need to <a href="{reset_link}"> reset your password?</a>
-                """
-                messages.success(request, mark_safe(msg))
+class AccountEmailActivateView(FormMixin, View):
+    success_url = '/login'
+    form_class = ReactivateEmailForm
+
+    def get(self, request, key=None, *args, **kwargs):
+        self.key = key
+        if key is not None:
+            qs = EmailActivation.objects.filter(key__iexact=key)
+            confirm_qs = qs.confirmable()
+            if confirm_qs.count() == 1:
+                obj = confirm_qs.first()
+                obj.activate()
+                messages.success(request, "Your email has been confirmed. Please login.")
                 return redirect("login")
-        return render(request, 'registration/activation-error.html', {})
+            else:
+                activate_qs = qs.filter(activated=True)
+                if activate_qs.exists():
+                    reset_link = reverse("password_reset")
+                    msg = f"""Your email has already been confirmed
+                    Do you need to <a href="{reset_link}"> reset your password?</a>
+                    """
+                    messages.success(request, mark_safe(msg))
+                    return redirect("login")
+
+        context = {"form": self.get_form(), 'key': key}
+        return render(request, 'registration/activation-error.html', context)
 
     def post(self, request, *args, **kwargs):
         # create form to receive an email
-        pass
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        msg = f"""Activation link sent, please check your email.
+        """
+        messages.success(self.request, mark_safe(msg))
+        email = form.cleaned_data.get("email")
+        obj = EmailActivation.objects.email_exists(email).first()
+        user = obj.user
+        new_activation = EmailActivation.objects.create(user=user, email=email)
+        new_activation.send_activation()
+
+        return super(AccountEmailActivateView, self).form_valid(form)
+
+    def form_invalid(self, form):
+        context = {"form": form, "key" : self.key}
+        return render(self.request, 'registration/activation-error.html', context)
 
 
 def guest_register_view(request):

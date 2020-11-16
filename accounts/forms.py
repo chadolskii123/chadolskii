@@ -1,10 +1,27 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.urls import reverse
+from django.utils.safestring import mark_safe
 
 from accounts.models import EmailActivation
 
 User = get_user_model()
+
+
+class ReactivateEmailForm(forms.Form):
+    email = forms.EmailField()
+
+    def clean_data(self):
+        email = self.cleaned_data.get('email')
+        qs = EmailActivation.objects.eamil_exists(email)
+        if not qs.exists():
+            register_link = reverse("register")
+            msg = f"""This email does not exists, would you like to register? 
+would you like to <a href="{register_link}"> register</a>?"""
+
+            raise forms.ValidationError(mark_safe(msg))
+        return email
 
 
 class UserAdminCreationForm(forms.ModelForm):
