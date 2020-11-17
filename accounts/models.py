@@ -60,12 +60,12 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
-    email = models.EmailField(max_length=255, unique=True)
-    full_name = models.CharField(max_length=255, blank=True, null=True)
-    is_active = models.BooleanField(default=True)  # can login
-    staff = models.BooleanField(default=False)  # staff user non-superuser
-    admin = models.BooleanField(default=False)  # superuser
-    timestamp = models.DateTimeField(auto_now_add=True)
+    email = models.EmailField(max_length=255, unique=True, verbose_name="이메일")
+    full_name = models.CharField(max_length=255, blank=True, null=True, verbose_name="이름")
+    is_active = models.BooleanField(default=True, verbose_name="활성화")  # can login
+    staff = models.BooleanField(default=False, verbose_name="직원")  # staff user non-superuser
+    admin = models.BooleanField(default=False, verbose_name="관리자")  # superuser
+    timestamp = models.DateTimeField(auto_now_add=True, verbose_name="가입일")
 
     USERNAME_FIELD = 'email'  # username
     # USERNAME_FIELD and password are required by default

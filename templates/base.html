@@ -10,10 +10,9 @@
     {% block base_head %}{% endblock %}
 </head>
 <body>
-{#<div class="nav" style="height:10px; background-color: #F4EFE9;"></div>#}
 {% include "base/navbar.html" with brand_name="농부삼촌" %}
 <!--    include문 안에 with를 쓸 때는 띄어쓰기 없이 써야 한다,,,,,, 하,,,, -->
-<div class="container">
+<div class="container" id = "nav-match">
     {% if messages %}
         <div class="alert alert-success messages">
             {% for message in messages %}

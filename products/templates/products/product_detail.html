@@ -11,11 +11,11 @@
             {% else %}
                 No Images found
             {% endif %}
-
         </div>
         <div class='col-12 col-md-6'>
             {% include 'products/snippets/update_cart.html' with product=object cart=cart %}
         </div>
+        {{ session }}
     </div>
 
 {% endblock %}}

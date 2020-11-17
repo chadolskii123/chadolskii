@@ -16,6 +16,12 @@ nav a {
     font-size: 1.5rem;
     text-align: center;
     text-decoration: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+nav li {
+    padding-right: 2rem;
 }
 
 nav li:hover a:hover {
@@ -38,6 +44,17 @@ nav li:hover a:hover i {
 .sticky + .content {
     padding-top: 60px;
 }
+
+.card-img-link {
+    align-self: center;
+}
+
+/* 제품 리스트 사진 사이즈 고정 */
+.card-img-top {
+    width: 15rem;
+    height: 15rem;
+}
+
 
 /*아이콘 컬러*/
 .fa {

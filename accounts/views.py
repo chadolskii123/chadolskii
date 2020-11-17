@@ -45,14 +45,13 @@ class AccountEmailActivateView(FormMixin, View):
             if confirm_qs.count() == 1:
                 obj = confirm_qs.first()
                 obj.activate()
-                messages.success(request, "Your email has been confirmed. Please login.")
+                messages.success(request, "이미 인증된 아이디입니다. 로그인 해주세요.")
                 return redirect("login")
             else:
                 activate_qs = qs.filter(activated=True)
                 if activate_qs.exists():
                     reset_link = reverse("password_reset")
-                    msg = f"""Your email has already been confirmed
-                    Do you need to <a href="{reset_link}"> reset your password?</a>
+                    msg = f"""이미 인증된 아이디 입니다. 혹시 비밀번호를 잊으셨나요? <a href="{reset_link}">비밀번호 재설정 하기</a>
                     """
                     messages.success(request, mark_safe(msg))
                     return redirect("login")
@@ -122,7 +121,7 @@ class LoginView(FormView):
 
         if user is not None:
             if not user.is_active:
-                messages.error(request, "This user is inactive")
+                messages.error(request, "활성화 되지 않은 아이디 입니다.")
                 return super(LoginView, self).form_invalid(form)
             login(request, user)
             user_logged_in.send(user.__class__, instance=user, request=request)
@@ -137,6 +136,9 @@ class LoginView(FormView):
 
             # context['form'] = LoginForm()
             return redirect("/")
+
+        msg = f"""아이디가 존재하지 않거나, 비밀번호가 일치하지 않습니다."""
+        messages.success(self.request, mark_safe(msg))
         return super(LoginView, self).form_invalid(form)
 
 

@@ -76,8 +76,8 @@ class GuestForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    email = forms.EmailField(label='Email')
-    password = forms.CharField(widget=forms.PasswordInput)
+    email = forms.EmailField(label='이메일')
+    password = forms.CharField(label="비밀번호", widget=forms.PasswordInput)
 
 
 class RegisterForm(forms.ModelForm):
@@ -92,12 +92,19 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ('full_name', 'email',)
 
+        labels = {
+            'full_name': '이름',
+            'email': '이메일',
+            'password1': '비밀번호',
+            'password2': '비밀번호 확인'
+        }
+
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("Passwords don't match")
+            raise forms.ValidationError("비밀번호가 일치하지 않습니다.")
         return password2
 
     def save(self, commit=True):

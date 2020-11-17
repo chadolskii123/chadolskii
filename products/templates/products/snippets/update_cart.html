@@ -2,9 +2,9 @@
     <input type="hidden" name="product_id" value="{{ product.id }}"/>
         <span class="submit-span">
         {% if product in cart.products.all %}
-            <button type="submit" class="btn btn-primary"> Remove</button>
+            <button type="submit" class="btn btn-primary"> 카트에서 빼기</button>
         {% else %}
-            <button type="submit" class="btn btn-success">Add to Cart</button>
+            <button type="submit" class="btn btn-success">카트에 담기</button>
         {% endif %}
         </span>
 </form>

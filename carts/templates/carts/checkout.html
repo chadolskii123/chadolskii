@@ -4,13 +4,11 @@
     {% if not billing_profile %}
         <div class="row text-center">
             <div class="col-12 col-md-6">
-                <p class="lead">Login</p>
-                {% include "accounts/snippets/form.html" with form=login_form next_url=request.build_absolute_uri %}
+                {% include "accounts/snippets/form.html" with form=login_form next_url=request.build_absolute_uri form_purpose='로그인'%}
             </div>
             <div class="col-12 col-md-6">
-                Continue as Guest
                 {% url "guest_register" as guest_register_url %}
-                {% include "accounts/snippets/form.html" with form=guest_form next_url=request.build_absolute_uri action_uri=guest_register_url %}
+                {% include "accounts/snippets/form.html" with form=guest_form next_url=request.build_absolute_uri action_uri=guest_register_url  form_purpose='게스트로 진행하기'%}
             </div>
         </div>
     {% else %}
@@ -22,7 +20,7 @@
                 </div>
                 <div class="col-6">
                     {% url "checkout_address_create" as checkout_address_create %}
-                    {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='shipping' %}
+                    {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='shipping'%}
                 </div>
                 {% url "checkout_address_reuse" as checkout_address_reuse %}
 
@@ -36,7 +34,7 @@
                 </div>
                 <div class="col-6">
                     {% url "checkout_address_create" as checkout_address_create %}
-                    {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='billing' %}
+                    {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='billing'%}
                 </div>
                 {% url "checkout_address_reuse" as checkout_address_reuse %}
                 {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_uri=checkout_address_reuse %}
@@ -45,7 +43,7 @@
         {% else %}
             {% if not has_card %}
                 <!-- enter credit card here -->
-                {{ has_card }}
+                <h3 class="pt-3">카드 등록하기</h3>
                 <div class="stripe-payment-form" method="post" id="payment-form"
                      data-token="{{ publish_key }}"
                      data-next-url="{{ request.build_absolute_uri }}" data-btn-title="Add Payment Method">

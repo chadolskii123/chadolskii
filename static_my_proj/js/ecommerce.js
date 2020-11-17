@@ -113,9 +113,9 @@ $(document).ready(function () {
                 console.log(data);
                 let submitSpan = thisForm.find(".submit-span");
                 if (data.added) {
-                    submitSpan.html('<button type="submit" class="btn btn-primary"> Remove?</button>')
+                    submitSpan.html('<button type="submit" class="btn btn-primary"> 카트에서 빼기</button>')
                 } else {
-                    submitSpan.html(' <button type="submit" class="btn btn-success">Add to Cart</button>')
+                    submitSpan.html(' <button type="submit" class="btn btn-success">카트에 담기</button>')
                 }
                 let navbarCount = $(".navbar-cart-count")
 
@@ -188,24 +188,21 @@ $(document).ready(function () {
         })
     }
 
-window.onscroll = function () {
-    myFunction()
-};
-
-let navbar = document.getElementById("navbar");
-let sticky = navbar.offsetTop;
-if (window.pageYOffset > sticky ){
-        navbar.classList.add("sticky")
-    } else{
-        navbar.classList.remove("sticky");
-    }
-
-function myFunction() {
-    if (window.pageYOffset > sticky ){
-        navbar.classList.add("sticky")
-    } else{
-        navbar.classList.remove("sticky");
-    }
-}
+    // window.onscroll = function () {
+    //
+    //     myFunction()
+    // };
+    //
+    // let navbar = document.getElementById("navbar");
+    // let sticky = navbar.offsetTop;
+    // let navMatch= $("#nav-match");
+    //
+    // function myFunction() {
+    //     if (window.pageYOffset > sticky) {
+    //         navbar.classList.add("sticky")
+    //     } else{
+    //         navbar.classList.remove("sticky");
+    //     }
+    // }
 
 });
