@@ -15,15 +15,15 @@ nav a {
     color: #055124;
     font-size: 1.5rem;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
 }
 
-nav li:hover a:hover{
+nav li:hover a:hover {
     color: white;
     background-color: #055124;
 }
-nav li:hover a:hover i{
+
+nav li:hover a:hover i {
     color: white;
     background-color: #055124;
 }
@@ -48,13 +48,16 @@ span .fa-bars {
     font-size: 30px;
 }
 
+.help-block {
+    color: red;
+}
 
 /* footer 바닥 고정 */
 footer {
     bottom: 0px;
 }
 
-footer img{
-    height : 2rem;
-    width : 2rem;
+footer img {
+    height: 2rem;
+    width: 2rem;
 }

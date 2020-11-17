@@ -2,6 +2,7 @@ from datetime import timedelta
 from random import randint
 
 from django.conf import settings
+from django.contrib import messages
 from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import (
@@ -12,6 +13,7 @@ from django.db.models.signals import pre_save, post_save
 from django.template.loader import get_template
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.safestring import mark_safe
 from django.utils.timezone import now
 
 from ecomm.settings import EMAIL_HOST
