@@ -45,7 +45,7 @@ class AccountEmailActivateView(FormMixin, View):
             if confirm_qs.count() == 1:
                 obj = confirm_qs.first()
                 obj.activate()
-                messages.success(request, "이미 인증된 아이디입니다. 로그인 해주세요.")
+                messages.success(request, "인증이 완료되었습니다. 로그인 해주세요 :)")
                 return redirect("login")
             else:
                 activate_qs = qs.filter(activated=True)
