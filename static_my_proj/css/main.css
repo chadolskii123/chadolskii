@@ -72,9 +72,15 @@ span .fa-bars {
 /* footer 바닥 고정 */
 footer {
     bottom: 0px;
+    background-color: #F4EFE9;
+    color: #055124;
+    font-size: 1.5rem;
+}
+footer a{
+    color : #055124;
 }
 
 footer img {
-    height: 2rem;
-    width: 2rem;
+    height: 4rem;
+    width: 4rem;
 }
