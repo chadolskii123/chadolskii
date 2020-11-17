@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     # thired party storage
     'storages',
     'tags',
+    'widget_tweaks',
 
 ]
 
