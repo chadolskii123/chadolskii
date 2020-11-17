@@ -19,13 +19,15 @@ from accounts.forms import LoginForm, RegisterForm, GuestForm, ReactivateEmailFo
 from accounts.models import GuestEmail, EmailActivation
 from accounts.signals import user_logged_in
 
-
 # 함수형 선언
 # @login_required
 # def account_home_view(request):
 #     return render(request, "accounts/home.html", {})
 
 #  클래스형 선언
+from ecomm.mixins import NextUrlMixin, RequestFormAttachMixin
+
+
 class AccountHomeView(LoginRequiredMixin, DetailView):
     template_name = "accounts/home.html"
 
@@ -68,14 +70,14 @@ class AccountEmailActivateView(FormMixin, View):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        msg = f"""Activation link sent, please check your email.
+        msg = f"""승인 메일 재전송 완료
         """
         messages.success(self.request, mark_safe(msg))
         email = form.cleaned_data.get("email")
         obj = EmailActivation.objects.email_exists(email).first()
         user = obj.user
         new_activation = EmailActivation.objects.create(user=user, email=email)
-        new_activation.send_activation(self.request)
+        new_activation.send_activation()
 
         return super(AccountEmailActivateView, self).form_valid(form)
 
@@ -104,42 +106,16 @@ def guest_register_view(request):
     return redirect("/register/")
 
 
-class LoginView(FormView):
+# Mixin 안에 함수들을 넣어서 Form의 값을 self에 담아 줄 수 있다.!!!!!!!!!
+class LoginView(NextUrlMixin, RequestFormAttachMixin, FormView):
     form_class = LoginForm
     success_url = '/'
     template_name = "accounts/login.html"
+    default_next = "/"
 
     def form_valid(self, form):
-        request = self.request
-        next_ = request.GET.get('next')
-        next_post = request.POST.get('next')
-        redirect_path = next_ or next_post or None
-
-        email = form.cleaned_data.get("email")
-        password = form.cleaned_data.get("password")
-        user = authenticate(request, username=email, password=password)
-
-        if user is not None:
-            if not user.is_active:
-                messages.error(request, "활성화 되지 않은 아이디 입니다.")
-                return super(LoginView, self).form_invalid(form)
-            login(request, user)
-            user_logged_in.send(user.__class__, instance=user, request=request)
-            try:
-                del request.session['guest_email_id']
-            except:
-                pass
-            if is_safe_url(redirect_path, request.get_host()):
-                return redirect(redirect_path)
-            else:
-                redirect("/")
-
-            # context['form'] = LoginForm()
-            return redirect("/")
-
-        msg = f"""아이디가 존재하지 않거나, 비밀번호가 일치하지 않습니다."""
-        messages.success(self.request, mark_safe(msg))
-        return super(LoginView, self).form_invalid(form)
+        next_url = self.get_next_url()
+        return redirect(next_url)
 
 
 class RegisterView(CreateView):
