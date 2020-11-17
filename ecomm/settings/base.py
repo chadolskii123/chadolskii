@@ -175,7 +175,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
 
-from ecomm.aws.conf import *
+# from ecomm.aws.conf import *
 
 CORS_REPLACE_HTTPS_REFERER = False
 HOST_SCHEME = "http://"

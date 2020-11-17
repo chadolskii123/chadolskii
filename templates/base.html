@@ -6,14 +6,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Base Template</title>
+    <title>땅끝 농부 꽃집</title>
     {% include 'base/css.html' %}
     {% block base_head %}{% endblock %}
 </head>
-<body style="background-color : #E6F8E0;">
-{% include "base/navbar.html" with brand_name="eCommerce" %}
+<body>
+{#<div class="nav" style="height:10px; background-color: #F4EFE9;"></div>#}
+{% include "base/navbar.html" with brand_name="농부삼촌" %}
 <!--    include문 안에 with를 쓸 때는 띄어쓰기 없이 써야 한다,,,,,, 하,,,, -->
-<div class="container">
+<div class="container py-3">
     {% if messages %}
         <div class="alert alert-success messages">
             {% for message in messages %}
@@ -31,5 +32,6 @@
 {% include 'base/js.html' %}
 {% block javascript %}
 {% endblock %}
+{% include 'base/footer.html' %}
 </body>
 </html>
