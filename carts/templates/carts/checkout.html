@@ -49,17 +49,17 @@
                      data-next-url="{{ request.build_absolute_uri }}" data-btn-title="Add Payment Method">
                 </div>
             {% else %}
-                <h1>Final Check Out</h1>
-                <p>Cart Item : {% for product in object.cart.products.all %}
+                <h1>카트에 담은 내역</h1>
+                <p>제품 : {% for product in object.cart.products.all %}
                     {{ product }}{% if not forloop.last %},{% endif %} {% endfor %}</p>
-                <p>Shipping Address : {{ object.shipping_address.get_address }}</p>
-                <p>Billing Address : {{ object.billing_address.get_address }}</p>
-                <p>Payment Method : {{ billing_profile.default_card }}(<a href="{{  billing_profile.get_payment_method_url }}">Change</a>)</p>
-                <p>Cart Total : {{ object.cart.total }}</p>
-                <p>Shipping Total : {{ object.shipping_total }}</p>
-                <p>Order Total : {{ object.total }}</p>
+                <p>판매자 주소: {{ object.shipping_address.get_address }}</p>
+                <p>구매자 주소 : {{ object.billing_address.get_address }}</p>
+                <p>결제 방법 : {{ billing_profile.default_card }}(<a href="{{  billing_profile.get_payment_method_url }}">바꾸기</a>)</p>
+                <p>구매 금액 : {{ object.cart.total }}</p>
+                <p>배송비용 : {{ object.shipping_total }}</p>
+                <p>총 비용 : {{ object.total }}</p>
                 <form class="form" action="" method="POST"> {% csrf_token %}
-                    <button type="submit" class="btn btn-success">CheckOut!</button>
+                    <button type="submit" class="btn btn-success">구매 확정</button>
                 </form>
             {% endif %}
         {% endif %}
