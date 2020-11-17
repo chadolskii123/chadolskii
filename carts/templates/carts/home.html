@@ -7,8 +7,8 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Product name</th>
-                <th scope="col">Product price</th>
+                <th scope="col">제품 이름</th>
+                <th scope="col">제품 가격</th>
             </tr>
             </thead>
             <tbody class="cart-body">
@@ -41,7 +41,7 @@
             {% include 'carts/snippets/remove_product.html' %}
         </div>
     {% else %}
-        <p class="lead">Cart is empty</p>
+        <p class="lead">카트가 비어있습니다.</p>
     {% endif %}
 
 {% endblock %}

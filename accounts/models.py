@@ -170,7 +170,7 @@ class EmailActivation(models.Model):
             return True
         return False
 
-    def send_activation(self):
+    def send_activation(self, request=None):
 
         if not self.activated and not self.forced_expired:
             if self.key:
@@ -193,6 +193,11 @@ class EmailActivation(models.Model):
                     html_message=html_,
                     fail_silently=False,  # 전송 실패시 False를 반환
                 )
+                if request is not None :
+                    if sent_mail :
+                        msg = f"""입력하신 이메일로 승인 요청 메일이 발송되었습니다. 확인 후 로그인 해주세요:)
+                                """
+                        messages.success(self.request, mark_safe(msg))
                 return sent_mail
         return False
 
@@ -209,7 +214,8 @@ pre_save.connect(pre_save_email_activation, sender=EmailActivation)
 def post_save_user_create_receiver(sender, instance, created, *args, **kwargs):
     if created:
         obj = EmailActivation.objects.create(user=instance, email=instance.email)
-        obj.send_activation()
+        request = None
+        obj.send_activation(request)
 
 
 post_save.connect(post_save_user_create_receiver, sender=User)
