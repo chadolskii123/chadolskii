@@ -13,9 +13,9 @@ from django.utils.http import is_safe_url
 from django.utils.safestring import mark_safe
 from django.views.generic import CreateView, FormView, DetailView
 from django.views.generic.base import View
-from django.views.generic.edit import FormMixin
+from django.views.generic.edit import FormMixin, UpdateView
 
-from accounts.forms import LoginForm, RegisterForm, GuestForm, ReactivateEmailForm
+from accounts.forms import LoginForm, RegisterForm, GuestForm, ReactivateEmailForm, UserDetailChangeForm
 from accounts.models import GuestEmail, EmailActivation
 from accounts.signals import user_logged_in
 
@@ -122,3 +122,19 @@ class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'accounts/register.html'
     success_url = '/login/'
+
+
+class UserDetailChangeView(LoginRequiredMixin, UpdateView):
+    form_class = UserDetailChangeForm
+    template_name = 'accounts/detail_update_view.html'
+
+    def get_object(self):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super(UserDetailChangeView, self).get_context_data(**kwargs)
+        context['title'] = 'Change Your Account Details'
+        return context
+
+    def get_success_url(self):
+        return reverse("accounts:home")

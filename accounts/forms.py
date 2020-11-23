@@ -13,7 +13,6 @@ User = get_user_model()
 class ReactivateEmailForm(forms.Form):
     email = forms.EmailField(label="이메일")
 
-
     def clean_data(self):
         email = self.cleaned_data.get('email')
         qs = EmailActivation.objects.eamil_exists(email)
@@ -55,6 +54,14 @@ class UserAdminCreationForm(forms.ModelForm):
         return user
 
 
+class UserDetailChangeForm(forms.ModelForm):
+    full_name = forms.CharField(label='이름', required=None, widget=forms.TextInput(attrs={'class':'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ['full_name']
+
+
 class UserAdminChangeForm(forms.ModelForm):
     """A form for updating users. Includes all the fields on
     the user, but replaces the password field with admin's
@@ -64,7 +71,7 @@ class UserAdminChangeForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('full_name', 'email', 'password', 'is_active', 'admin')
+        fields = ('full_name',)
 
     def clean_password(self):
         # Regardless of what the user provides, return the initial value.
@@ -102,12 +109,12 @@ class LoginForm(forms.Form):
                 confirm_email = EmailActivation.objects.filter(email=email)
                 is_confirmable = confirm_email.confirmable().exists()
                 if is_confirmable:
-                    msg1 = "이메일을 확인하여 승인해주세요.<br>메일을 못찾으시겠다면 오른쪽 링크를 눌러서 재전송 요청해주세요. " +reconfirm_msg.lower()
+                    msg1 = "이메일을 확인하여 승인해주세요.<br>메일을 못찾으시겠다면 오른쪽 링크를 눌러서 재전송 요청해주세요. " + reconfirm_msg.lower()
                     messages.success(request, mark_safe(msg1))
                     raise forms.ValidationError("")
                 email_confirm_exists = EmailActivation.objects.email_exists(email).exists()
                 if email_confirm_exists:
-                    msg2 = "Email not confirmed. " +reconfirm_msg
+                    msg2 = "Email not confirmed. " + reconfirm_msg
                     messages.success(request, mark_safe(msg2))
                     raise forms.ValidationError(mark_safe(msg2))
                 if not is_confirmable and email_confirm_exists:

@@ -9,7 +9,6 @@
         <p class="card-text">{{ instance.description|truncatewords:14 }}</p>
         <a href="{{instance.get_absolute_url }}" class="btn btn-primary">보기</a>
         {% include 'products/snippets/update_cart.html' with product=instance cart=cart %}
-<!--        <a href = '{% url "products:detail" slug=instance.slug%}' class ="btn btn-warning">URL shortcut</a>-->
 
     </div>
 </div>

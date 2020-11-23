@@ -1,8 +1,10 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 
 from analytics.mixins import ObjectViewedMixin
+from analytics.models import ObjectViewed
 from analytics.signals import object_viewed_signal
 from carts.models import Cart
 from .models import Product
@@ -28,6 +30,24 @@ class ProductFeaturedListView(ListView):
     def get_queryset(self, *args, **kwargs):
         request = self.request
         return Product.objects.featured()
+
+
+class UserProductHistoryView(LoginRequiredMixin, ListView):
+    template_name = 'products/product_list.html'
+    # template_name = 'products/user_history.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserProductHistoryView, self).get_context_data(*args, **kwargs)
+        cart_obj, new_obj = Cart.objects.new_or_get(self.request)
+        context['cart'] = cart_obj
+        return context
+
+    def get_queryset(self, *args, **kwargs):
+        request = self.request
+        views = request.user.objectviewed_set.by_model(Product, model_queryset=True)
+        # model_queryset을 True로 하고 template_name을 product_list로 하면 봤던 항목들을 하나씩만 보여줌,
+        # 반대로 하면 본 순서대로 중복이 되더라도 여러번 나오게 해줌
+        return views
 
 
 class ProductFeaturedDetailView(ObjectViewedMixin, DetailView):

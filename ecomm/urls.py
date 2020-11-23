@@ -43,6 +43,7 @@ urlpatterns = [
                   #path(r'accounts/', RedirectView.as_view(url='/account')),
                   path(r'account/', include('accounts.urls'), name='accounts'),
                   path(r'accounts/', include('accounts.passwords.urls')),
+                  path(r'orders/', include('orders.urls'), name='orders'),
                   path(r'api/cart/', cart_detail_api_view, name='api_cart'),
                   path(r'checkout_address_create_view/', checkout_address_create_view,
                        name='checkout_address_create'),

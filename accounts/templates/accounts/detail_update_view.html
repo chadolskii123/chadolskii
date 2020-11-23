@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="col-12 col-md-8 mx-auto">
+        {% if title %}
+            <h1 class="my-3">{{ title }}</h1>
+        {% endif %}
+        <form method="POST" action="{% if action_uri %} {{ action_uri }} {% endif %}">    {% csrf_token %}
+            {% if next_url %}
+                <input type="hidden" name="next" value="{{ next_url }}"/>
+            {% endif %}
+            {{ form.as_p }}
+            <label for="email">이메일</label>
+            <input type="text" id="email" class="disabled form-control" value="{{ request.user.email }}" disabled/>
+            <span class="help-text" style="color:darkgrey;">이메일은 변경 할 수 없습니다.</span><br/><br/>
+            <button type="submit" class="btn btn-secondary">Save</button>
+            <a href="{% url 'password_change' %}">Change Password</a>
+        </form>
+    </div>
+{% endblock %}
