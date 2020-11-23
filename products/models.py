@@ -1,5 +1,8 @@
 import os
 import random
+
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
 from django.db import models
 from django.db.models import Q
 from django.db.models.signals import pre_save
@@ -75,6 +78,8 @@ class Product(models.Model):
     featured = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now_add=True)
+    is_digital = models.BooleanField(default=False)
+
 
     objects = ProductManager()
 
@@ -85,6 +90,11 @@ class Product(models.Model):
     def __str__(self):
         return self.title
 
+    def get_downloads(self):
+        # qs = self.productfile_set.all()
+        qs = self.productfile_set.all()
+        return qs
+
 
 def product_pre_save_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
@@ -92,3 +102,30 @@ def product_pre_save_receiver(sender, instance, *args, **kwargs):
 
 
 pre_save.connect(product_pre_save_receiver, sender=Product)
+
+
+def upload_product_file_loc(instance, filename):
+    slug = instance.product.slug
+    if slug:
+        location = "product/{}".format(slug)
+    else:
+        slug = unique_slug_generator(instance.product)
+        location = "product/{}".format(slug)
+    return location + filename  # /path/to/filename.mp4
+
+
+class ProductFile(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    file = models.FileField(upload_to=upload_product_file_loc,
+                            storage=FileSystemStorage(location=settings.PROTECTED_ROOT)
+                            )
+
+    def __str__(self):
+        return str(self.file.name)
+
+    def get_download_url(self):
+        return self.file.url
+
+    @property
+    def name(self):
+        return self.file.name

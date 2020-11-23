@@ -73,6 +73,7 @@ def checkout_home(request):
     guest_form = GuestForm()
     address_form = AddressForm()
     billing_address_id = request.session.get('billing_address_id', None)
+    shipping_address_required = not cart_obj.is_all_digital
     shipping_address_id = request.session.get('shipping_address_id', None)
 
     billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
@@ -96,6 +97,7 @@ def checkout_home(request):
         is_prepared = order_obj.check_done()
         if is_prepared:
             did_charge, crg_msg = billing_profile.charge(order_obj)
+
             if did_charge:
                 order_obj.mark_paid()
                 request.session['cart_items'] = 0
@@ -103,9 +105,10 @@ def checkout_home(request):
                 '''
                 is this the best spot?!
                 '''
-                if not billing_profile.user :
+                if not billing_profile.user:
                     billing_profile.set_cards_inactive()
                     request.session.clear()
+
                 return redirect('cart:success')
             else:
                 print(crg_msg)
@@ -115,7 +118,6 @@ def checkout_home(request):
     del request.session['cart_id']
     redirect to success
     '''
-    print("@@@@@@@@@@@@@@@has_card : " , has_card)
     context = {
         "object": order_obj,
         "billing_profile": billing_profile,
@@ -125,6 +127,8 @@ def checkout_home(request):
         "address_qs": address_qs,
         "has_card": has_card,
         "publish_key": STRIPE_PUB_KEY,
+        "shipping_address_required": shipping_address_required,
+
     }
 
     return render(request, "carts/checkout.html", context)

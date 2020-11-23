@@ -26,6 +26,7 @@ from addresses.views import checkout_address_create_view, checkout_address_reuse
 from billing.views import payment_method_view, payment_method_createview
 from carts.views import cart_detail_api_view
 from marketing.views import MarketingPreferenceUpdateView, MailchimpWebhookView
+from orders.views import LibraryView
 from .views import home_page, about_page, contact_page
 
 urlpatterns = [
@@ -38,9 +39,10 @@ urlpatterns = [
                   path(r'register/guest/', guest_register_view, name='guest_register'),
                   # 부트스트랩 !
                   path(r'bootstrap/', TemplateView.as_view(template_name='bootstrap/example.html')),
+                  path(r'library/', LibraryView.as_view(), name='library'),
                   path(r'products/', include('products.urls'), name='search'),
                   path(r'cart/', include('carts.urls'), name='cart'),
-                  #path(r'accounts/', RedirectView.as_view(url='/account')),
+                  # path(r'accounts/', RedirectView.as_view(url='/account')),
                   path(r'account/', include('accounts.urls'), name='accounts'),
                   path(r'accounts/', include('accounts.passwords.urls')),
                   path(r'orders/', include('orders.urls'), name='orders'),

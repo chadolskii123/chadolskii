@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
 from billing.models import BillingProfile
-from orders.models import Order
+from orders.models import Order, ProductPurchase
 
 
 class OrderListView(LoginRequiredMixin, ListView):
@@ -23,3 +23,10 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
         if qs.count() == 1:
             return qs.first()
         return Http404
+
+
+class LibraryView(LoginRequiredMixin, ListView):
+    template_name = 'orders/library.html'
+
+    def get_queryset(self):
+        return ProductPurchase.objects.products_by_request(self.request)
