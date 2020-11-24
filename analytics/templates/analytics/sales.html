@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+            <h1>Sales Data</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p>Recent (Total : ${{ recent_orders_total.total__sum }})</p>
+            <p>Recent (Avg : ${{ recent_orders_total.total__avg }})</p>
+            <p>Recent Cart Avg (Avg : {{ recent_cart_data.cart__products__price__avg }})</p>
+            <p>Recent Cart Counts (Count : {{ recent_cart_data.cart__products__count }})</p>
+
+
+            <ol>
+                {% for order in recent_orders %}
+                    <li>{{ order.order_id }}
+                        {{ order.total }}
+                        {{ order.updated }}</li>
+                    </ol>
+                {% endfor %}
+        </div>
+        <div class="col">
+            <p>Shipped</p>
+            <ol>
+                {% for order in shipped_orders %}
+                    <li> {{ order.order_id }}
+                        {{ order.total }}
+                        {{ order.updated }}</li>
+                    </ol>
+                {% endfor %}
+        </div>
+        <div class="col">
+            <p>Paid</p>
+            <ol>
+                {% for order in paid_orders %}
+                    <li>{{ order.order_id }}
+                        {{ order.total }}
+                        {{ order.updated }}</li>
+                    </ol>
+                {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}}

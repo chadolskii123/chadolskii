@@ -1,11 +1,11 @@
 # aws.download.utils.py
 
-
-import boto3
+import boto
 import re
 import os
 
 from django.conf import settings
+from boto.s3.connection import OrdinaryCallingFormat
 
 
 class AWSDownload(object):
@@ -23,36 +23,24 @@ class AWSDownload(object):
         super(AWSDownload, self).__init__(*args, **kwargs)
 
     def s3connect(self):
-        s3 = boto3.resource(
-            service_name='s3',
-
+        conn = boto.s3.connect_to_region(
+            self.region,
             aws_access_key_id=self.access_key,
             aws_secret_access_key=self.secret_key,
+            is_secure=True,
+            calling_format=OrdinaryCallingFormat()
         )
-        for bucket in s3.buckets.all() :
-            print(bucket.name)
-            if bucket.name == 'chadoslkii-ecomm':
-                return bucket
-        return None
-
-        # conn = boto.connect_s3(
-        #     #region=self.region,
-        #     aws_access_key_id=self.access_key,
-        #     aws_secret_access_key=self.secret_key,
-        #     is_secure=True,
-        #     calling_format=OrdinaryCallingFormat()
-        # )
-        # return conn
+        return conn
 
     def get_bucket(self):
         conn = self.s3connect()
-        # bucket_name = self.bucket
-        # bucket = conn.get_bucket(bucket_name, validate=False)
-        return conn #bucket
+        bucket_name = self.bucket
+        bucket = conn.get_bucket(bucket_name)
+        return bucket
 
     def get_key(self, path):
         bucket = self.get_bucket()
-        key = bucket.get_key(path)
+        key = bucket.get_key(path, headers=None, version_id=None, response_headers=None, validate=True)
         return key
 
     def get_filename(self, path, new_filename=None):
@@ -70,8 +58,7 @@ class AWSDownload(object):
     def generate_url(self, path, download=True, new_filename=None):
         file_url = None
         aws_obj_key = self.get_key(path)
-        # https://chadoslkii-ecomm.s3.ap-northeast-2.amazonaws.com/media/1368047093/1368047093.JPG
-        # s3://chadoslkii-ecomm/media/1368047093/1368047093.JPG
+        print(aws_obj_key)
         if aws_obj_key:
             headers = None
             if download:

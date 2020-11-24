@@ -12,7 +12,7 @@
 <body>
 {% include "base/navbar.html" with brand_name="농부삼촌" %}
 <!--    include문 안에 with를 쓸 때는 띄어쓰기 없이 써야 한다,,,,,, 하,,,, -->
-<div class="container" id = "nav-match">
+<div class="container mt-3" id = "nav-match">
     {% if messages %}
         <div class="alert alert-success messages">
             {% for message in messages %}

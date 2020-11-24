@@ -21,6 +21,15 @@ ORDER_STATUS_CHOICES = (
 
 
 class OrderManagerQueryset(models.query.QuerySet):
+    def recent(self):
+        return self.order_by("-updated", "-timestamp")
+
+    def by_status(self, status="shipped"):
+        return self.filter(status=status)
+
+    def not_refunded(self):
+        return self.exclude(status='refunded')
+
     def by_billing_profile(self, request):
         billing_profile, created = BillingProfile.objects.new_or_get(request)
         return self.filter(billing_profile=billing_profile)
@@ -82,6 +91,13 @@ class Order(models.Model):
             return "Shipped"
         else:
             return "Shipping Soon."
+
+    def get_status(self):
+        if self.status == "refunded":
+            return "Refunded order"
+        elif self.status == "shipped":
+            return "Shipped"
+        return "Shipping Soon"
 
     def update_total(self):
         cart_total = self.cart.total

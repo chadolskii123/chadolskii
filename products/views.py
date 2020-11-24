@@ -125,8 +125,9 @@ class ProductDownloadView(View):
             return redirect(download_obj.get_default_url())
 
         aws_filepath = download_obj.generate_download_url()
-        print("awsFILE!!!!!! : ", aws_filepath)
+        print(aws_filepath)
         return HttpResponseRedirect(aws_filepath)
+
         # file_root = PROTECTED_ROOT
         # filepath = download_obj.file.path  # .url includes /media/
         # final_filepath = os.path.join(file_root, filepath)  # where the file is stored

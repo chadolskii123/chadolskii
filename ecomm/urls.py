@@ -23,6 +23,7 @@ from django.views.generic import TemplateView, RedirectView
 
 from accounts.views import guest_register_view, RegisterView, LoginView
 from addresses.views import checkout_address_create_view, checkout_address_reuse_view
+from analytics.views import SalesView
 from billing.views import payment_method_view, payment_method_createview
 from carts.views import cart_detail_api_view
 from marketing.views import MarketingPreferenceUpdateView, MailchimpWebhookView
@@ -51,6 +52,7 @@ urlpatterns = [
                        name='checkout_address_create'),
                   path(r'checkout_address_reuse_view/', checkout_address_reuse_view,
                        name='checkout_address_reuse'),
+                  path(r'analytics/sales', SalesView.as_view(), name='sales_analytics'),
                   path('billing/payment_method/', payment_method_view, name='billing-payment-method'),
                   path('billing/payment_method/create/', payment_method_createview, name='billing-payment-method-api'),
                   path('search/', include('search.urls'), name='search'),
