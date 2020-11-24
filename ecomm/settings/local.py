@@ -33,7 +33,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'chadolskii123@gmail.com'
 EMAIL_HOST_PASSWORD = 'tpkclgmdpowmyegb'
-SERVER_EMAIL = 'chadolskii123@gmail.com'
+# SERVER_EMAIL = 'chadolskii123@gmail.com'
 DEFAULT_FROM_MAIL = 'chadolskii123'
 
 BASE_URL = "127.0.0.1:8000"
@@ -174,6 +174,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
 
 PROTECTED_ROOT = os.path.join(BASE_DIR, "media_root", "protected_media")
+
+from ecomm.aws.conf import *
 
 CORS_REPLACE_HTTPS_REFERER = False
 HOST_SCHEME = "http://"

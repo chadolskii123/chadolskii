@@ -1,10 +1,15 @@
-<form class='form-product-ajax mt-3' method="POST" class="form" action="{% url 'cart:update' %}" data-endpoint ="{% url 'cart:update' %}">{% csrf_token %}
-    <input type="hidden" name="product_id" value="{{ product.id }}"/>
-        <span class="submit-span">
+<form class='form-product-ajax mt-3' method="POST" class="form" action="{% url 'cart:update' %}"
+      data-endpoint="{% url 'cart:update' %}">{% csrf_token %}
+    <input type="hidden" name="product_id" value="{{ product.id }}"
+           data-is-digital="{% if product.is_digital %}true{% else %}false {% endif %}"/>
+    <span class="submit-span">
         {% if product in cart.products.all %}
-            <button type="submit" class="btn btn-primary"> 카트에서 빼기</button>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary" href="/cart/">카트로 :) </a>
+                <button type="submit" class="btn btn-outline-danger"> 카트에서 빼기</button>
+            </div>
         {% else %}
-            <button type="submit" class="btn btn-success">카트에 담기</button>
+            <button type="submit" class="btn btn-outline-success">카트에 담기</button>
         {% endif %}
         </span>
 </form>

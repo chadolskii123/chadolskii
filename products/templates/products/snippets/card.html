@@ -1,14 +1,16 @@
 <div class="card" style="width: 18rem;">
     {% if instance.image %}
-    <a href="{{instance.get_absolute_url}}" class="card-img-link">
-        <img src="{{ instance.image.url }}" class="card-img-top" alt="{{ instance.title}} logo">
-    </a>
+        <a href="{{ instance.get_absolute_url }}" class="card-img-link">
+            <img src="{{ instance.image.url }}" class="card-img-top" alt="{{ instance.title }} logo">
+        </a>
     {% endif %}
     <div class="card-body">
         <h4 class="card-title">{{ instance.title }}</h4>
         <p class="card-text">{{ instance.description|truncatewords:14 }}</p>
-        <a href="{{instance.get_absolute_url }}" class="btn btn-primary">보기</a>
-        {% include 'products/snippets/update_cart.html' with product=instance cart=cart %}
+        <div class="text-center">
+            <a href="{{ instance.get_absolute_url }}" class="btn btn-primary my-2">보기</a>
+            {% include 'products/snippets/update_cart.html' with product=instance cart=cart %}
+        </div>
 
     </div>
 </div>

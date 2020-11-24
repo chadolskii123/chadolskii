@@ -175,6 +175,8 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media_root")
 
+PROTECTED_ROOT = os.path.join(BASE_DIR, "media_root", "protected_media")
+
 from ecomm.aws.conf import *
 
 CORS_REPLACE_HTTPS_REFERER = False

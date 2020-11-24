@@ -1,3 +1,4 @@
+import os
 import random
 import string
 from django.utils.text import slugify
@@ -6,6 +7,10 @@ from django.utils.text import slugify
 random_string_generator is located here:
 http://joincfe.com/blog/random-string-generator-in-python/
 '''
+
+
+def get_filename(path):
+    return os.path.basename(path)
 
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):

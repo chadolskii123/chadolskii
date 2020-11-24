@@ -188,9 +188,14 @@ class ProductPurchaseManager(models.Manager):
     def by_request(self, request):
         return self.get_queryset().by_request(request)
 
-    def products_by_request(self, request):
+    def products_by_id(self, request):
         qs = self.by_request(request).digital()
         ids_in = [x.product.id for x in qs]
+        return ids_in
+
+    def products_by_request(self, request):
+        qs = self.products_by_id(request)
+        ids_in = [x for x in qs]
         products_qs = Product.objects.filter(id__in=ids_in).distinct()
         return products_qs
 
