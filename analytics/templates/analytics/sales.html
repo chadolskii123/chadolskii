@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 
     <div class="row">
@@ -7,16 +6,44 @@
             <h1>Sales Data</h1>
         </div>
     </div>
+    <div class="row my-5">
+        <div class="col-7">
+            <h3>Today's sales</h3>
+            <hr/>
+            <p>Recent (Total : ${{ today.recent_data.total__sum|floatformat:'2'}})</p>
+            <ol>
+                {% for order in today.recent|slice:":5" %}
+                    <li class="my-2">Order #{{ order.order_id }}<br/>
+                        ${{ order.total }},&nbsp;&nbsp;
+                        {{ order.updated|timesince }} 전</li>
+
+                {% endfor %}
+            </ol>
+            <h3>This Week's sales</h3>
+            <hr/>
+            <p>Recent (Total : ${{ this_week.recent_data.total__sum|floatformat:'2' }})</p>
+            <ol>
+                {% for order in this_week.recent|slice:":5" %}
+                   <li class="my-2">Order #{{ order.order_id }}<br/>
+                        ${{ order.total }},&nbsp;&nbsp;
+                        {{ order.updated|timesince }} 전</li>
+
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="col">
+            <canvas class='render-chart' id="thisWeekSales" data-type="week" width="400" height="400"></canvas>
+        </div>
+    </div>
+
     <div class="row">
-        <div class="col">
-            <p>Recent (Total : ${{ recent_orders_total.total__sum }})</p>
-            <p>Recent (Avg : ${{ recent_orders_total.total__avg }})</p>
-            <p>Recent Cart Avg (Avg : {{ recent_cart_data.cart__products__price__avg }})</p>
-            <p>Recent Cart Counts (Count : {{ recent_cart_data.cart__products__count }})</p>
-
-
+        <div class="col-12">
+            <h1>Previous 4 Week's sales</h1>
+        </div>
+        <div class="col-7">
+            <p>Recent (Total : ${{ last_four_weeks.recent_data.total__sum|floatformat:'2' }})</p>
             <ol>
-                {% for order in recent_orders %}
+                {% for order in last_four_weeks.recent %}
                     <li>{{ order.order_id }}
                         {{ order.total }}
                         {{ order.updated }}</li>
@@ -25,26 +52,9 @@
             </ol>
         </div>
         <div class="col">
-            <p>Shipped</p>
-            <ol>
-                {% for order in shipped_orders %}
-                    <li> {{ order.order_id }}
-                        {{ order.total }}
-                        {{ order.updated }}</li>
-                {% endfor %}
-            </ol>
-
-        </div>
-        <div class="col">
-            <p>Paid</p>
-            <ol>
-                {% for order in paid_orders %}
-                    <li>{{ order.order_id }}
-                        {{ order.total }}
-                        {{ order.updated }}</li>
-                {% endfor %}
-            </ol>
-
+            <div class="col">
+                <canvas class='render-chart' id="fourWeekSales" data-type="4week" width="400" height="400"></canvas>
+            </div>
         </div>
     </div>
 

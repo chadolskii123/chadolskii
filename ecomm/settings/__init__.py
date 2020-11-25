@@ -1,4 +1,4 @@
-# from .base import *
+from .base import *
 from .production import *
 
 # 로컬이 프로덕션에서 사용되지 않게 하기 위한 방식

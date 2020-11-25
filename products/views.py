@@ -125,7 +125,6 @@ class ProductDownloadView(View):
             return redirect(download_obj.get_default_url())
 
         aws_filepath = download_obj.generate_download_url()
-        print(aws_filepath)
         return HttpResponseRedirect(aws_filepath)
 
         # file_root = PROTECTED_ROOT
@@ -156,7 +155,6 @@ class ProductDetailView(ObjectViewedMixin, DetailView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ProductDetailView, self).get_context_data(*args, **kwargs)
-        print(context)
         return context
 
     # def get_object(self, *args, **kwargs):

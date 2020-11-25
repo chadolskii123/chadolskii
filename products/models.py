@@ -23,7 +23,6 @@ def get_filename_ext(filepath):
 # 랜덤 파일 이름 설정
 def upload_image_path(instance, filename):
     new_filename = random.randint(1, 3910209312)
-    print(new_filename)
     name, ext = get_filename_ext(filename)
     final_filename = '{new_filename}{ext}'.format(new_filename=new_filename, ext=ext)
     return "{new_filename}/{final_filename}".format(new_filename=new_filename, final_filename=final_filename)
@@ -109,7 +108,6 @@ def upload_product_file_loc(instance, filename):
     slug = instance.product.slug
     id_ = 0
     id_ = instance.id
-    print(slug)
     if id_ is None:
         Klass = instance.__class__
         qs = Klass.objects.all().order_by('-pk')
@@ -121,8 +119,6 @@ def upload_product_file_loc(instance, filename):
     if not slug:
         slug = unique_slug_generator(instance.product)
     location = "product/{slug}/{id}/".format(slug=slug, id=id_)
-    print(location)
-    print(filename)
     return location + filename  # /path/to/filename.mp4
 
 

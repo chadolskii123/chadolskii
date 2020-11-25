@@ -13,7 +13,9 @@
 <!-- jQuery confirm js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 {# js Render #}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.8/jsrender.js" integrity="sha512-ZLg3KNxsqi7wZcBFRyplttGMfBVyvSx6fyNbF0+G+sC5EEtCx0EB/oBCuB/m3nRr31iPX/6jQYD1WE5CtHNP1g==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/1.0.8/jsrender.js"
+        integrity="sha512-ZLg3KNxsqi7wZcBFRyplttGMfBVyvSx6fyNbF0+G+sC5EEtCx0EB/oBCuB/m3nRr31iPX/6jQYD1WE5CtHNP1g=="
+        crossorigin="anonymous"></script>
 {% include "base/js_templates.html" %}
 {# Django Secure AJAX JS#}
 <script src="{% static 'js/csrf_ajax.js' %}"></script>
@@ -23,3 +25,9 @@
 
 {# eCommerce Main JS! #}
 <script src="{% static 'js/ecommerce.main.js' %}"></script>
+
+{# Chart.js#}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+
+{# eCommerse sales data#}
+<script src="{% static 'js/ecommerce.sales.js' %}"></script>
