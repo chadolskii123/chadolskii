@@ -1,7 +1,7 @@
 <div class="card" style="width: 18rem;">
     {% if instance.image %}
         <a href="{{ instance.get_absolute_url }}" class="card-img-link">
-            <img src="{{ instance.image.url }}" class="card-img-top" alt="{{ instance.title }} logo">
+            <img src="{{ instance.image.url }}" class="card-img-top mt-4" alt="{{ instance.title }} logo" style="width:100%; height: auto;">
         </a>
     {% endif %}
     <div class="card-body">

@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     'tags',
     'widget_tweaks',
     'xhtml2pdf',
+    'django.contrib.humanize',
 
 ]
 

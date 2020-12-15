@@ -1,11 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-        <div class='row my-3'>
-           {% for obj in object_list %}
-            <div class='col my-3'>
-                {% include "products/snippets/card.html" with instance=obj %}
-            </div>
-        {% endfor %}
-    </div>
+         {% include './snippets/list.html'%}
 {% endblock %}}

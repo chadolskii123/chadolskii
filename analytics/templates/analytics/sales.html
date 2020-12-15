@@ -1,37 +1,32 @@
-{% extends "base.html" %}
-{% block content %}
 
+{% load humanize %}
+
+<div class="col-9">
     <div class="row">
         <div class="col-12">
             <h1>Sales Data</h1>
         </div>
     </div>
-    <div class="row my-5">
-        <div class="col-7">
+    <div class="row my-5 text-right">
+        <div class="col-4">
             <h3>Today's sales</h3>
-            <hr/>
             <p>Recent (Total : ${{ today.recent_data.total__sum|floatformat:'2'}})</p>
-            <ol>
+            
                 {% for order in today.recent|slice:":5" %}
-                    <li class="my-2">Order #{{ order.order_id }}<br/>
-                        ${{ order.total }},&nbsp;&nbsp;
-                        {{ order.updated|timesince }} 전</li>
-
+                    <p class="my-2">Order #{{ order.order_id }}<br/>
+                        ${{ order.total|intcomma }},&nbsp;&nbsp;
+                        {{ order.updated|timesince }} 전</p>
                 {% endfor %}
-            </ol>
+            <br/>
             <h3>This Week's sales</h3>
-            <hr/>
             <p>Recent (Total : ${{ this_week.recent_data.total__sum|floatformat:'2' }})</p>
-            <ol>
                 {% for order in this_week.recent|slice:":5" %}
-                   <li class="my-2">Order #{{ order.order_id }}<br/>
-                        ${{ order.total }},&nbsp;&nbsp;
-                        {{ order.updated|timesince }} 전</li>
-
+                   <p class="my-2">Order #{{ order.order_id }}<br/>
+                        ${{ order.total|intcomma  }},&nbsp;&nbsp;
+                        {{ order.updated|timesince }} 전</p>
                 {% endfor %}
-            </ol>
         </div>
-        <div class="col">
+        <div class="col-7">
             <canvas class='render-chart' id="thisWeekSales" data-type="week" width="400" height="400"></canvas>
         </div>
     </div>
@@ -40,22 +35,19 @@
         <div class="col-12">
             <h1>Previous 4 Week's sales</h1>
         </div>
-        <div class="col-7">
-            <p>Recent (Total : ${{ last_four_weeks.recent_data.total__sum|floatformat:'2' }})</p>
-            <ol>
+        <div class="col-4 text-right">
+            <p>Recent (Total : ${{ last_four_weeks.recent_data.total__sum|floatformat:'2'|intcomma }})</p>
                 {% for order in last_four_weeks.recent %}
-                    <li>{{ order.order_id }}
-                        {{ order.total }}
-                        {{ order.updated }}</li>
+                    <p>{{ order.order_id }}<br>
+                        ${{ order.total|intcomma }}<br>
+                        {{ order.updated }}</p>
 
                 {% endfor %}
-            </ol>
         </div>
-        <div class="col">
+        <div class="col-7">
             <div class="col">
                 <canvas class='render-chart' id="fourWeekSales" data-type="4week" width="400" height="400"></canvas>
             </div>
         </div>
     </div>
-
-{% endblock %}}
+</div>

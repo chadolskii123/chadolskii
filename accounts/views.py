@@ -123,6 +123,10 @@ class RegisterView(CreateView):
     template_name = 'accounts/register.html'
     success_url = '/login/'
 
+    def form_valid(self, form):
+        messages.success(self.request, "인증메일이 전송되었습니다.")
+        return super().form_valid(form)
+
 
 class UserDetailChangeView(LoginRequiredMixin, UpdateView):
     form_class = UserDetailChangeForm

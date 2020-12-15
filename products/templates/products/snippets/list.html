@@ -1,10 +1,10 @@
-{% extends "base.html" %}
 {% load static %}
+
 {% block content %}
-   <div class="container">
+         <div class="container">
            {% for obj in object_list %}
                 {% include "products/snippets/card.html" with instance=obj %}
         {% endfor %}
         </div>
         <script src="{% static 'js/magicgrid.js' %}"></script>
-{% endblock %}}
+{% endblock %}
