@@ -1,0 +1,22 @@
+{% load static %}
+<div style="border: 1px solid #cfcfd0; background: #f8f8f9; padding: 10px 14px; border-radius: 3px; display:inline-block; text-align:left;">
+<!-- 주소와 우편번호를 입력할 <input>들을 생성하고 적당한 name과 class를 부여한다 -->
+<label style="width: 6rem;">우편번호</label>
+<input type="text" name="" class="postcodify_postcode5" value="" style="width:10rem;"/>
+<button type="button" id="postcodify_search_button">검색</button><br />
+<label style="width: 6rem;">도로명 주소</label>
+<input type="text" name="" class="postcodify_address" value="" style="width:20rem;"/><br />
+<label style="width: 6rem;">상세주소</label>
+<input type="text" name="" class="postcodify_details" value="" style="width:20rem;"/><br />
+<label style="width: 6rem;">참고항목</label>
+<input type="text" name="" class="postcodify_extra_info" value="" style="width:20rem;"/><br />
+</div>
+<!-- jQuery와 Postcodify를 로딩한다 -->
+<script src="{% static 'js/search.min.js' %}"></script>
+
+<!-- "검색" 단추를 누르면 팝업 레이어가 열리도록 설정한다 -->
+<script> 
+    $(function() { 
+        $("#postcodify_search_button").postcodifyPopUp(); 
+    });
+</script>

@@ -193,3 +193,9 @@ AWS_GROUPNAME = "Chadolskii_ecomm_group"
 AWS_USERNAME = "chadolskii-ecomm-user"
 AWS_ACCESS_KEY_ID = "AKIA2WVZDJELZWFVYXV3"
 AWS_SECRET_KEY_ID = "wsE1QvFkWSoz+gPWv+fPLv0gIVE9iHxKVK1ipIel"
+
+
+# 1,200초(20분) 세션 타임아웃 설정
+# Request를 보낼 때마다 세션 정보를 갱신해서 접속 후 20분간 활동이 없을 경우에 세션을 종료함
+SESSION_COOKIE_AGE = 1200
+SESSION_SAVE_EVERY_REQUEST = True

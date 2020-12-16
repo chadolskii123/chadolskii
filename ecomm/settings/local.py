@@ -188,3 +188,9 @@ CSRF_COOKIE_SECURE = False
 SECURE_HSTS_SECONDS = None
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 SECURE_FRAME_DENY = False
+
+
+# 1,200초(20분) 세션 타임아웃 설정
+# Request를 보낼 때마다 세션 정보를 갱신해서 접속 후 20분간 활동이 없을 경우에 세션을 종료함
+SESSION_COOKIE_AGE = 1200
+SESSION_SAVE_EVERY_REQUEST = True

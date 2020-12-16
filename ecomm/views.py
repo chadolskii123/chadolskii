@@ -15,6 +15,10 @@ def home_page(request):
     return render(request, 'home_page.html', context)
 
 
+def juso_page(request):
+    return render(request, 'addresses/juso.html')
+
+
 def about_page(request):
     context = {
         "title": "About Page!",

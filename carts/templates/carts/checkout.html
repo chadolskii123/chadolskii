@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block content %}
     {% if not billing_profile %}
-        <div class="row text-center">
-            <div class="col-12 col-md-6">
-                {% include "accounts/snippets/form.html" with form=login_form next_url=request.build_absolute_uri form_purpose='로그인'%}
+        <div class="row text-left">
+            <div class="col-6 col-md-6" style="minimum-width:6rem;">
+                {% include "accounts/snippets/form.html" with form=login_form next_url=request.build_absolute_uri form_purpose='로그인하기'%}
             </div>
-            <div class="col-12 col-md-6">
+            <div class="col-6 col-md-6" style="minimum-width:6rem;">
                 {% url "guest_register" as guest_register_url %}
                 {% include "accounts/snippets/form.html" with form=guest_form next_url=request.build_absolute_uri action_uri=guest_register_url  form_purpose='게스트로 진행하기'%}
             </div>
@@ -18,7 +18,7 @@
                     <p class="lead">Shipping Address</p>
                     <hr/>
                 </div>
-                <div class="col-6">
+                <div class="col-12">
                     {% url "checkout_address_create" as checkout_address_create %}
                     {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='shipping'%}
                 </div>
@@ -32,7 +32,7 @@
                     <p class="lead">Billing Address</p>
                     <hr/>
                 </div>
-                <div class="col-6">
+                <div class="col-8">
                     {% url "checkout_address_create" as checkout_address_create %}
                     {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='billing'%}
                 </div>
@@ -64,4 +64,11 @@
             {% endif %}
         {% endif %}
     {% endif %}
+{% endblock %}
+
+
+
+{% block script %}
+<!-- jQuery와 Postcodify를 로딩한다 -->
+
 {% endblock %}

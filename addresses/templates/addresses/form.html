@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 <form method="POST"
       action="{% if action_uri %}
                 {{ action_uri }}
@@ -11,6 +12,6 @@
     {% if address_type %}
         <input type="hidden" name="address_type" value="{{ address_type }}"/>
     {% endif %}
-    {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Submit</button>
+        {% include 'addresses/juso.html'%}
 </form>
+

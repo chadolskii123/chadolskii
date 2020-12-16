@@ -28,10 +28,11 @@ from billing.views import payment_method_view, payment_method_createview
 from carts.views import cart_detail_api_view
 from marketing.views import MarketingPreferenceUpdateView, MailchimpWebhookView
 from orders.views import LibraryView
-from .views import home_page, about_page, contact_page
+from .views import home_page, about_page, contact_page, juso_page
 
 urlpatterns = [
                   path(r'', home_page, name='home'),
+                  path('juso/', juso_page, name='juso'),
                   path(r'about/', about_page, name='about'),
                   path(r'contact/', contact_page, name='contact'),
                   path(r'login/', LoginView.as_view(), name='login'),
