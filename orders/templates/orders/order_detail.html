@@ -8,12 +8,21 @@
     </div>
     <div class="row">
         <div class="col-12 col-md-6 mx-auto">
+            {% if object.shipping_address.get_address %}
             <p>판매자 주소: {{ object.shipping_address.get_address }}</p>
+            {% endif %}
             <p>구매자 주소 : {{ object.billing_address.get_address }}</p>
             <p>구매 금액 : {{ object.cart.total }}</p>
             <p>배송비용 : {{ object.shipping_total }}</p>
             <p>총 비용 : {{ object.total }}</p>
             <p>상태 : {{ object.get_shipping_status }}</p>
+        {% for product in object.cart.products.all %}
+            {% if product.is_digital %}
+                {% for download in product.get_downloads %}
+                <a href="{{ download.get_download_url }}" class="btn btn-outline-danger">{{ product.title }} -{{ download.display_name }}</a>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
         </div>
     </div>
 {% endblock %}

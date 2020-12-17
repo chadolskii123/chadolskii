@@ -72,7 +72,7 @@ class Product(models.Model):
     title = models.CharField(max_length=120)
     slug = models.SlugField(blank=True, default='', unique=True)
     description = models.TextField()
-    price = models.DecimalField(decimal_places=2, max_digits=20, default=39.99)
+    price = models.DecimalField(decimal_places=2, max_digits=20, default=1.00)
     # FileField는 다 들어가짐, ImageField는 이미지 파일만 들어와짐
     image = models.ImageField(upload_to=upload_image_path, null=True,
                               blank=True)  # 앞에는 / 없고 뒤에 넣어야 함 - setting에 설정한 media root 로 갈 듯

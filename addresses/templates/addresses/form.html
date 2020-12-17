@@ -10,8 +10,7 @@
     {% endif %}
 
     {% if address_type %}
-        <input type="hidden" name="address_type" value="{{ address_type }}"/>
+        {% include 'addresses/juso.html' with address_type=address_type form=form%}
     {% endif %}
-        {% include 'addresses/juso.html'%}
 </form>
 

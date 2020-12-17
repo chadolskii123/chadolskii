@@ -30,7 +30,7 @@ class ObjectViewedManager(models.Manager):
         return ObjectViewedQuerySet(self.model, using=self._db)
 
     def by_model(self, model_class, model_queryset=False):
-        return self.get_queryset().by_model(model_class, model_queryset=model_queryset)
+        return self.get_queryset().by_model(model_class, model_queryset=model_queryset).distinct()
 
 
 class ObjectViewed(models.Model):

@@ -56,7 +56,7 @@ class Cart(models.Model):
         return True
 
 
-def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
+def m2m_changed_cart_receiver(sender, instance: Cart, action, *args, **kwargs):
     if action == 'post_add' or action == 'post_remove' or action == 'post_clear':
         products = instance.products.all()
         total = 0
@@ -71,9 +71,14 @@ def m2m_changed_cart_receiver(sender, instance, action, *args, **kwargs):
 m2m_changed.connect(m2m_changed_cart_receiver, sender=Cart.products.through)
 
 
-def pre_save_cart_receiver(sender, instance, *args, **kwargs):
+def pre_save_cart_receiver(sender, instance: Cart, *args, **kwargs):
+    # 카트 중간 합산을 위한 pre_save
     if instance.subtotal > 0:
-        instance.total = Decimal(instance.subtotal)  * Decimal(1.08) # 8% tax
+        # 구매 물품이 전부다 file형태라면 배송료가 추가되지 않음
+        if instance.is_all_digital:
+            instance.total = Decimal(instance.subtotal)
+        else:
+            instance.total = Decimal(instance.subtotal) + 5
     else:
         instance.total = 0
 

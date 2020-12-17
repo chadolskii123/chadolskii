@@ -18,6 +18,8 @@ def home_page(request):
 def juso_page(request):
     return render(request, 'addresses/juso.html')
 
+def introduce_page(request):
+    return render(request, 'introduce.html')
 
 def about_page(request):
     context = {

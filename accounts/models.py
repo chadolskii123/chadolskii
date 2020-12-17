@@ -176,9 +176,9 @@ class EmailActivation(models.Model):
 
         if not self.activated and not self.forced_expired:
             if self.key:
-                base_url = getattr(settings, 'BASE_URL', '')[:-1]
+                base_url = getattr(settings, 'BASE_URL', '')
                 key_path = reverse("accounts:email_activate", kwargs={'key': self.key})
-                path = f"https://{base_url}{key_path}"
+                path = f"http://{base_url}{key_path}"
                 context = {
                     'path': path,
                     'email': self.user.email
@@ -193,7 +193,7 @@ class EmailActivation(models.Model):
                     from_email=EMAIL_HOST,
                     recipient_list=recipient_list,
                     html_message=html_,
-                    fail_silently=False,  # 전송 실패시 False를 반환
+                    fail_silently=False,  # 전송 실패시 False를 반환,
                 )
                 return sent_mail
         return False
@@ -212,7 +212,11 @@ def post_save_user_create_receiver(sender, instance, created, *args, **kwargs):
     if created:
         obj = EmailActivation.objects.create(user=instance, email=instance.email)
         request = None
-        obj.send_activation()
+        sent_mail = obj.send_activation()
+        if sent_mail :
+            pass
+        else :
+            raise ValueError("인증메일 전송에 실패하였습니다.")
 
 
 post_save.connect(post_save_user_create_receiver, sender=User)

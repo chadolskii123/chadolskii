@@ -69,7 +69,7 @@ class OrderManagerQueryset(models.query.QuerySet):
         return self.filter(updated__day__gte=now.day)
 
     def totals_data(self):
-        return self.aggregate(Sum("total"), Avg("total"))
+        return self.aggregate(Sum("total"), Avg("total"), Count("total"))
 
     def cart_data(self):
         return self.aggregate(
@@ -118,7 +118,7 @@ class Order(models.Model):
                                         on_delete=models.SET_NULL)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     status = models.CharField(max_length=120, default='created', choices=ORDER_STATUS_CHOICES)
-    shipping_total = models.DecimalField(default=5.99, max_digits=100, decimal_places=2)
+    shipping_total = models.DecimalField(default=0, max_digits=100, decimal_places=2)
     total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     active = models.BooleanField(default=True)
     timestamp = models.DateTimeField(auto_now=True)
@@ -139,16 +139,16 @@ class Order(models.Model):
 
     def get_shipping_status(self):
         if self.status == 'shipped':
-            return "Shipped"
+            return "배송 완료"
         else:
-            return "Shipping Soon."
+            return "배송 준비."
 
     def get_status(self):
         if self.status == "refunded":
-            return "Refunded order"
+            return "환불 완료"
         elif self.status == "shipped":
-            return "Shipped"
-        return "Shipping Soon"
+            return "배송 완료"
+        return "배송 준비"
 
     def update_total(self):
         cart_total = self.cart.total
@@ -188,7 +188,7 @@ class Order(models.Model):
     def mark_paid(self):
         if self.status != 'paid':
             if self.check_done():
-                self.status = 'paid'
+                self.status = '지불 완료'
                 self.save()
                 self.update_puchases()
         return self.status

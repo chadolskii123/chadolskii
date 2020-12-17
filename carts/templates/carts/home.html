@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load humanize %}
 {% block content %}
     <h1>Cart</h1>
     {% if cart.products.exists %}
@@ -19,16 +19,16 @@
                       {% include 'carts/snippets/remove_product.html' with product=product %}
 {#                        {% include 'products/snippets/update_cart.html' with product=product in_cart=True %}#}
                     </td>
-                    <td>{{ product.price }}</td>
+                    <td>{{ product.price|floatformat|intcomma }} 천원</td>
                 </tr>
             {% endfor %}
             <tr>
                 <th colspan="2"></th>
-                <td><b>Subtotal </b> $<span class="cart-subtotal">{{ cart.subtotal }}</span></td>
+                <td><b>소계 </b> <span class="cart-subtotal">{{ cart.subtotal|floatformat|intcomma }} 천원</span></td>
             </tr>
             <tr>
                 <th colspan="2"></th>
-                <td><b>total </b> $<span class="cart-total">{{ cart.total }}</span></td>
+                <td><b>합계 </b> <span class="cart-total">{{ cart.total|floatformat|intcomma }} 천원</span></td>
             </tr>
             <tr>
                 <th colspan="2"></th>

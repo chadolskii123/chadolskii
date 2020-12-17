@@ -21,11 +21,11 @@
             <div class="col-12 col-md-3 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Billing</h4>
+                        <h4 class="card-title">구매</h4>
                         <div class="list-group">
-                            <a class="list-group-item" href="{% url 'orders:list' %}">Orders</a>
-                            <a class="list-group-item" href="{% url 'billing-payment-method' %}">Payment Methods</a>
-                            <a class="list-group-item" href="#">Address</a>
+                            <a class="list-group-item" href="{% url 'orders:list' %}">구매내역</a>
+                            <a class="list-group-item" href="{% url 'billing-payment-method' %}">결제 방법 추가</a>
+                            <a class="list-group-item" href="#">주소</a>
                         </div>
                     </div>
                 </div>
@@ -33,11 +33,11 @@
             <div class="col-12 col-md-3 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Account Details</h4>
+                        <h4 class="card-title">계정 정보</h4>
                          <div class="list-group">
-                            <a class="list-group-item" href="{% url 'accounts:user_update' %}">Update Details</a>
-                            <a class="list-group-item" href="{% url 'password_change' %}">Change Password</a>
-                            <a class="list-group-item" href="{% url 'library' %}">Library</a>
+                            <a class="list-group-item" href="{% url 'accounts:user_update' %}">정보 수정</a>
+                            <a class="list-group-item" href="{% url 'password_change' %}">비밀번호 수정</a>
+                            <a class="list-group-item" href="{% url 'library' %}">구매 파일</a>
                         </div>
                     </div>
                 </div>
@@ -45,9 +45,9 @@
             <div class="col-12 col-md-3 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Preferences</h4>
+                        <h4 class="card-title">기타 설정</h4>
                          <div class="list-group">
-                            <a class="list-group-item" href="{% url 'marketing-pref' %}">Email Marketing</a>
+                            <a class="list-group-item" href="{% url 'marketing-pref' %}">마케팅 수신 동의</a>
                         </div>
                     </div>
                 </div>
@@ -55,9 +55,9 @@
             <div class="col-12 col-md-3 my-3">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">History</h4>
+                        <h4 class="card-title">히스토리</h4>
                           <div class="list-group">
-                            <a class="list-group-item" href="{% url 'accounts:user_history' %}">Products</a>
+                            <a class="list-group-item" href="{% url 'accounts:user_history' %}">살펴본 물건</a>
                         </div>
                     </div>
                 </div>

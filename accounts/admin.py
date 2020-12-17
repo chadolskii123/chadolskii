@@ -15,16 +15,17 @@ class UserAdmin(BaseUserAdmin):
     form = UserAdminChangeForm
     add_form = UserAdminCreationForm
 
-    # The fields to be used in displaying the User model.
-    # These override the definitions on the base UserAdmin
-    # that reference specific fields on auth.User.
+    # 보여질 필드
     list_display = ('email', 'admin', 'staff', 'is_active')
+    # 필터링 할 필드
     list_filter = ('admin', 'staff', 'is_active')
+    # 보여질 필드들을 구분
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('full_name',)}),
         ('Permissions', {'fields': ('admin', 'staff', 'is_active')}),
     )
+
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (

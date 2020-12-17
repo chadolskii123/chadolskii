@@ -1,22 +1,23 @@
 {% if address_qs.exists %}
- <div class="row justify-content-center align-items-left" style="height:50vh">
-    <form method="POST" action="{{ action_uri }}"> {% csrf_token %}
-        {% if next_url %}
-            <input type="hidden" name="next" value="{{ next_url }}"/>
-        {% endif %}
+    <div class="row justify-content-center align-items-left">
+        <form method="POST" action="{{ action_uri }}"> {% csrf_token %}
+            {% if next_url %}
+                <input type="hidden" name="next" value="{{ next_url }}"/>
+            {% endif %}
 
-        {% if address_type %}
-            <input type="hidden" name="address_type" value="{{ address_type }}"/>
-        {% endif %}
-        {% for address in address_qs %}
-            <label for="address-{{ address.id }}">
-                <input type="radio" id="address-{{ address.id }}" name='shipping_address'
-                       value="{{ address.id }}"/>
-                {{ address.address_line_1 }}
-            </label>
+            {% if address_type %}
+                <input type="hidden" name="address_type" value="{{ address_type }}"/>
+            {% endif %}
+            {% for address in address_qs %}
+                <label for="address-{{ address.id }}">
+                    <input type="radio" id="address-{{ address.id }}" name='shipping_address'
+                           value="{{ address.id }}"/>
+                    {{ address.address_line_1 }}
+                </label>
+                <br/>
+            {% endfor %}
             <br/>
-        {% endfor %}
-    <button class="btn btn-success" type="submit">적용하기</button>
-    </form>
+            <button class="btn btn-success" type="submit">적용하기</button>
+        </form>
     </div>
 {% endif %}

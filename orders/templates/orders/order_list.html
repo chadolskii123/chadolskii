@@ -18,7 +18,12 @@
                 {% for object in object_list %}
                     <tr>
                         <td><a href="{{ object.get_absolute_url }}">{{ object.order_id }}</a></td>
-                        <td>{{ object.get_shipping_status }}</td>
+
+                        {% if object.cart.is_all_digital %}
+                            <td> <a href="{% url 'library' %}">다운받으로 가기</a> </td>
+                        {% else%}
+                            <td>{{ object.get_shipping_status }}</td>
+                        {% endif %}
                         <td>{{ object.total }}</td>
                     </tr>
                     {% empty %}

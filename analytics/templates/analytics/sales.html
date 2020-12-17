@@ -4,25 +4,26 @@
 <div class="col-9">
     <div class="row">
         <div class="col-12">
-            <h1>Sales Data</h1>
+            <h1>세일즈</h1>
         </div>
     </div>
     <div class="row my-5 text-right">
         <div class="col-4">
-            <h3>Today's sales</h3>
-            <p>Recent (Total : ${{ today.recent_data.total__sum|floatformat:'2'}})</p>
+            <h3>오늘 판매 {{ today.recent_data }}</h3>
+            <p>(합계 : {{ today.recent_data.total__sum|intcomma|default:0}} 원)</p>
             
                 {% for order in today.recent|slice:":5" %}
                     <p class="my-2">Order #{{ order.order_id }}<br/>
-                        ${{ order.total|intcomma }},&nbsp;&nbsp;
+                        {{ order.total|intcomma|default:0}} 원 }},&nbsp;&nbsp;
                         {{ order.updated|timesince }} 전</p>
                 {% endfor %}
             <br/>
-            <h3>This Week's sales</h3>
-            <p>Recent (Total : ${{ this_week.recent_data.total__sum|floatformat:'2' }})</p>
+            <h3>지난 한주간 판매</h3>
+            <h3>{{ this_week }}</h3>
+            <p>(합계 : {{ this_week.recent_data.total__sum|intcomma|default:0}}원 )</p>
                 {% for order in this_week.recent|slice:":5" %}
                    <p class="my-2">Order #{{ order.order_id }}<br/>
-                        ${{ order.total|intcomma  }},&nbsp;&nbsp;
+                        {{ order.total|intcomma|default:0}} 원 }},&nbsp;&nbsp;
                         {{ order.updated|timesince }} 전</p>
                 {% endfor %}
         </div>
@@ -33,13 +34,13 @@
 
     <div class="row">
         <div class="col-12">
-            <h1>Previous 4 Week's sales</h1>
+            <h1>지난 한달 간</h1>
         </div>
         <div class="col-4 text-right">
-            <p>Recent (Total : ${{ last_four_weeks.recent_data.total__sum|floatformat:'2'|intcomma }})</p>
+            <p>(합계 : {{ last_four_weeks.recent_data.total__sum|floatformat:'2'|intcomma|default:0}} 원 )</p>
                 {% for order in last_four_weeks.recent %}
                     <p>{{ order.order_id }}<br>
-                        ${{ order.total|intcomma }}<br>
+                        {{ order.total|intcomma|default:0}} 원 }}<br>
                         {{ order.updated }}</p>
 
                 {% endfor %}

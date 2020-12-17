@@ -1,6 +1,6 @@
 <form method ="GET" class="form my-2 my-lg-0 search_form" action="{% url 'search:query' %}">
     <div class="input-group">
-        <input class="form-control" type="search" placeholder="찾을 상품을 입력하세요." aria-label="Search" name="q" value="{{ request.GET.q  }}"/>
+        <input class="form-control" type="search" placeholder="찾을 내용" aria-label="Search" name="q" value="{{ request.GET.q  }}"/>
         <span class="input-group-btn">
             <button class="btn btn-outline-success" type="submit">찾기</button>
         </span>

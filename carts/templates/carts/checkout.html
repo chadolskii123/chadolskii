@@ -1,44 +1,49 @@
 {% extends "base.html" %}
+{% load humanize %}
 {% load static %}
 {% block content %}
     {% if not billing_profile %}
         <div class="row text-left">
             <div class="col-6 col-md-6" style="minimum-width:6rem;">
-                {% include "accounts/snippets/form.html" with form=login_form next_url=request.build_absolute_uri form_purpose='로그인하기'%}
+                {% include "accounts/snippets/form.html" with form=login_form next_url=request.build_absolute_uri form_purpose='로그인하기' %}
             </div>
             <div class="col-6 col-md-6" style="minimum-width:6rem;">
                 {% url "guest_register" as guest_register_url %}
-                {% include "accounts/snippets/form.html" with form=guest_form next_url=request.build_absolute_uri action_uri=guest_register_url  form_purpose='게스트로 진행하기'%}
+                {% include "accounts/snippets/form.html" with form=guest_form next_url=request.build_absolute_uri action_uri=guest_register_url  form_purpose='게스트로 진행하기' %}
             </div>
         </div>
     {% else %}
         {% if not object.shipping_address and shipping_address_required %}
-            <div class="row mt-3">
+            <div class="row mt-3 col-8">
                 <div class="col-12">
-                    <p class="lead">Shipping Address</p>
+                    <p class="lead">판매자 주소</p>
                     <hr/>
                 </div>
-                <div class="col-12">
+                <div class="col-7">
                     {% url "checkout_address_create" as checkout_address_create %}
-                    {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='shipping'%}
+                    {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='shipping' %}
                 </div>
                 {% url "checkout_address_reuse" as checkout_address_reuse %}
-
-                {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_uri=checkout_address_reuse %}
+                <div class="col-4 text-left pt-3"  style="border: 1px solid #cfcfd0; background: #f8f8f9;  border-radius: 3px;">
+                    <h3 class="text-center">기존 사용 주소</h3>
+                    {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_uri=checkout_address_reuse %}
+                </div>
             </div>
         {% elif not object.billing_address %}
             <div class="row mt-3">
                 <div class="col-12">
-                    <p class="lead">Billing Address</p>
+                    <p class="lead">구매자 주소</p>
                     <hr/>
                 </div>
-                <div class="col-8">
+                <div class="col-7">
                     {% url "checkout_address_create" as checkout_address_create %}
-                    {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='billing'%}
+                    {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='billing' %}
                 </div>
                 {% url "checkout_address_reuse" as checkout_address_reuse %}
-                {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_uri=checkout_address_reuse %}
-
+                <div class="col-4 text-left"  style="border: 1px solid #cfcfd0; background: #f8f8f9;border-radius: 3px;">
+                    <h3>기존 사용 주소</h3>
+                    {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_uri=checkout_address_reuse %}
+                </div>
             </div>
         {% else %}
             {% if not has_card %}
@@ -52,12 +57,19 @@
                 <h1>카트에 담은 내역</h1>
                 <p>제품 : {% for product in object.cart.products.all %}
                     {{ product }}{% if not forloop.last %},{% endif %} {% endfor %}</p>
-                <p>판매자 주소: {{ object.shipping_address.get_address }}</p>
-                <p>구매자 주소 : {{ object.billing_address.get_address }}</p>
-                <p>결제 방법 : {{ billing_profile.default_card }}(<a href="{{  billing_profile.get_payment_method_url }}">바꾸기</a>)</p>
-                <p>구매 금액 : {{ object.cart.total }}</p>
-                <p>배송비용 : {{ object.shipping_total }}</p>
-                <p>총 비용 : {{ object.total }}</p>
+                {% if object.shipping_address %}
+                    <p>판매자 주소: {{ object.shipping_address.get_address }}</p>
+                {% endif %}
+                {% if object.billing_address %}
+                    <p>구매자 주소 : {{ object.billing_address.get_address }}</p>
+                {% endif %}
+                <p>결제 방법 : {{ billing_profile.default_card }}&nbsp;&nbsp;&nbsp;<a
+                        href="{{ billing_profile.get_payment_method_url }}" class="btn btn-sm btn-warning">바꾸기</a></p>
+                <p>구매 금액 : {{ object.cart.total|floatformat|intcomma|default:0 }} 천원</p>
+                {% if object.shipping_total != 0 %}
+                    <p>배송비용 : {{ object.shipping_total|floatformat|intcomma|default:0 }} 천원</p>
+                {% endif %}
+                <p>총 비용 : {{ object.total|floatformat|intcomma|default:0 }} 천원</p>
                 <form class="form" action="" method="POST"> {% csrf_token %}
                     <button type="submit" class="btn btn-success">구매 확정</button>
                 </form>
@@ -69,6 +81,6 @@
 
 
 {% block script %}
-<!-- jQuery와 Postcodify를 로딩한다 -->
+    <!-- jQuery와 Postcodify를 로딩한다 -->
 
 {% endblock %}
