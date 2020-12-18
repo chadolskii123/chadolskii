@@ -3,6 +3,7 @@
 {% block content %}
     <div class="col-10 col-md-6 mx-auto">
         <h1>결제 카드 변경</h1>
+        <h4>카드 넘버는 꼭 4242-4242-4242-4242로 해주세요<h4>
         <div class="stripe-payment-form" method="post" id="payment-form" data-token="{{ publish_key }}"
              data-next-url="{% url 'cart:checkout' %}" data-btn-title="카드 추가">
         </div>
