@@ -1,11 +1,101 @@
 {% extends "./base.html" %}
-
 {% load static %}
 
-<title>홈페이지 구성</title>
 {% block content %}
-<div class="container col-6 text-left">
 
-</div>
+<h2 class="py-3">경력 사항 &nbsp;&nbsp;&nbsp;&nbsp;<a href="" download="인적사항.pdf" class="btn btn-outline-dark">이력서</a></h2>
+   <table class="table">
+  <thead class="table-danger">
+    <tr>
+      <th scope="col" width="15%">B.D(Before Developer)</th>
+      <th scope="col" width="15%">기간</th>
+      <th scope="col" width="15%">역할</th>
+      <th scope="col" width="40%">스킬</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" rowspan="2" style="vertical-align: middle;"></th>
+      <td scope="row" rowspan="2" style="vertical-align: middle;">2016.02 ~ 2019.04</td>
+      <td scope="row" rowspan="2" style="vertical-align: middle;">해외영업</td>
+      <td scope="row" style="vertical-align: middle; text-align: left;">바이어, 거래처, 유관부서와의 원활한 소통</td>
+    </tr>
+    <tr>
+      <td scope="row" style="vertical-align: middle; text-align: left;">꼼꼼한 원, 부자재 관리를 통한 비용 최소화</td>
+    </tr>
+  </tbody>
+</table>
+ <table class="table">
+  <thead class="table-warning">
+    <tr>
+      <th scope="col" width="15%">B.J(Between Jobs)</th>
+      <th scope="col" width="15%">기간</th>
+      <th scope="col" width="15%">역할</th>
+      <th scope="col" width="40%">스킬</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" rowspan="3" style="vertical-align: middle;"></th>
+      <td scope="row" rowspan="3" style="vertical-align: middle;">2019.06 ~ 2019.12</td>
+      <td scope="row" rowspan="3" style="vertical-align: middle;">국비 교육 수료 학생</td>
+      <td scope="row" style="vertical-align: middle; text-align: left;">Java를 기반으로 한 웹 프로그래밍</td>
+    </tr>
+    <tr>
+      <td scope="row" style="vertical-align: middle; text-align: left;">팀원으로서 팀장을 도와 팀이 원활히 운영될 수 있도록 분위기 주도</td>
+    </tr>
+    <tr class="text-left">
+      <td scope="row" style="vertical-align: middle; text-align: left;">팀장으로서 팀원들을 이끌어 프로젝트를 성공적으로 마무리</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table">
+  <thead class="table-success">
+    <tr>
+      <th scope="col" width="15%">A.D(After Developer)</th>
+      <th scope="col" width="15%">기간</th>
+      <th scope="col" width="15%">역할</th>
+      <th scope="col" width="40%">스킬</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     <th scope="row" rowspan="3" style="vertical-align: middle;"></th>
+      <td scope="row" rowspan="3" style="vertical-align: middle;">2019.12 ~ 2020.12</td>
+      <td scope="row" rowspan="3" style="vertical-align: middle;">IT팀 개발자</td>
+      <td scope="row" style="vertical-align: middle; text-align: left;">* 아이패드 App 변환(Objective C 어플리케이션 -> Java 웹)<br>3G모델 사용에 따른 불편, 매년 발생하는 라이센스 비용 절약<br>
+                                <a href="https://fc.brinks.co.kr/jsp/WEBB/webFOM.jsp" target=”_blank” class="btn btn-outline-success" title="vpn통신을 통해서 구동되는 페이지">홈페이지</a>
+                                <a href="/products/tab_example/18/" class="btn btn-success" title="갤럭시 탭으로 배포하면서 나눠준 메뉴얼" download="XPLATFORM_EXAMPLE.PDF">메뉴얼</a>                        
+                                
+                                </td>
+    </tr>
+   <tr>
+      <td scope="row" style="vertical-align: middle; text-align: left;">* XPLATFORM 유지/보수 (Java-SpringFramework 기반)<br>유관부서와의 긴밀한 협업을 통해 프로그램 사용성 향상<br>추가 기능 개발을 통한<br>
+      <a href="/products/xplatform_ex/17/" class="btn btn-success" title="연차 외 다른 기능은 어디 밖에다 보여주기 애매한 부분,," download="XPLATFORM_EXAMPLE.PDF">메뉴얼</a></td>
+    </tr>
+    <tr>
+      <td scope="row" style="vertical-align: middle; text-align: left;">CD/ATM기 운영 회사 인수 후 단말기 유지/보수<br>(C++ 기반으로 구성되어 공부 후 소스 분석 하려는 중)</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="py-3">Personality</h2>
+<table class="table">
+  <thead class="table-primary">
+    <tr>
+      <th scope="col" width="15%">장점</th>
+      <th scope="col" width="15%">단점</th>
+      <th scope="col" width="15%">미래</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+     <th scope="row" style="vertical-align: middle;"><span style="font-size:4rem; color:blue;">협업 장인</span><span style="font-size:5px;">이었고</span><br><span style="font-size:6px;">개발자로서도 그렇게 되고싶음</span><br></th>
+     <td scope="row" style="vertical-align: middle; text-align: left;">개발자가 된 후 회사에 혼자 개발자로 일하다보니<br>협업을 해본적이 없음.</td>
+     <td scope="row" style="vertical-align: middle; text-align: left;">준비된 협업러<br>다른 사람과 같이 일해보고 싶은 마음이 가득함<br>개발자로선 경험이 없어서 많이 노력할 예정<br>(잘 듣고, 잘 이해하고, 잘 따르기)</td>
+    </tr>
+  </tbody>
+</table>
 
 {% endblock %}

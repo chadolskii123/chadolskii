@@ -21,7 +21,6 @@ jmespath==0.10.0
 mailchimp==2.0.9
 mailchimp-marketing==3.0.25
 Pillow==8.0.1
-psycopg2==2.8.6
 python-bidi==0.4.2
 python-dateutil==2.8.1
 pytz==2020.4
