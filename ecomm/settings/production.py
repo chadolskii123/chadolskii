@@ -38,7 +38,7 @@ EMAIL_HOST_PASSWORD = 'nhgkolavslwbeijx'
 SERVER_EMAIL = 'chadolskii123@gmail.com'
 DEFAULT_FROM_MAIL = 'chadolskii123'
 
-BASE_URL = "chadolskii-ecomm.herokuapp.com/"
+BASE_URL = "chadolskii.herokuapp.com/"
 
 INSTALLED_APPS = [
     'django.contrib.admin',
