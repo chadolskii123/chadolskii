@@ -70,7 +70,6 @@ class SalesView(LoginRequiredMixin, TemplateView):
         context['today'] = today_data
         context['this_week'] = qs.by_weeks_range(weeks_ago=1, number_of_weeks=1).get_sales_breakdown()
         context['last_four_weeks'] = qs.by_weeks_range(weeks_ago=5, number_of_weeks=5).get_sales_breakdown()
-        # datetime get month ranges
-        # https://kirr.co/xv2cmz
 
+  
         return context

@@ -13,9 +13,5 @@
 일반적인 사용자의 경우는 아이템들을 보여준다.
 {% endcomment %}
 {% block content %}
-    {% if request.user.is_admin %}
-        {% include 'analytics/sales.html'%}
-    {% else %}
-        {% include 'products/snippets/list.html'%}
-    {% endif %}
+    {% include 'products/snippets/list.html'%}
 {% endblock %}

@@ -4,9 +4,6 @@
         <p style="float:left; margin:0 0;width:100%; position:absolute; background-color: #f5f566;">*파일*</p><br>
     {% endif %}
 
-    {% if instance in request.user.order.products %}
-        <p style="float:left; margin:0 0;width:100%; position:absolute; background-color: #f5f566;">*파일*</p><br>
-    {% endif %}
     {% if instance.image %}
         <a href="{{ instance.get_absolute_url }}" class="card-img-link">
             <img src="{{ instance.image.url }}" class="card-img-top mt-4" alt="{{ instance.title }} logo"

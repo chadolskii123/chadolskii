@@ -110,7 +110,7 @@ $(document).ready(function () {
                 success: function (data) {
                     if (data.owner) {
                         isOwner = true
-                        submitSpan.html('<a class="btn btn-warning" href="/library">In Library</a>');
+                        submitSpan.html('<a class="btn btn-warning" href="/library">저장소로</a>');
                         return true
                     } else {
                         isOwner = false

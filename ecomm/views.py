@@ -12,7 +12,8 @@ def home_page(request):
     context = {
         "object_list" : object_list
     }
-    
+    if request.user.is_admin :
+        return redirect("sales_analytics")
     return render(request, 'home_page.html', context)
 
 

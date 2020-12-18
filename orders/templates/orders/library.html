@@ -4,15 +4,15 @@
 
     <div class="row">
         <div class="col-12">
-            <h1>Library</h1>
+            <h1>저장소</h1>
         </div>
     </div>
     <div class="row">
         <div class="col">
             <table class="table">
                 <thead>
-                <th>Product</th>
-                <th>Download</th>
+                <th>제품명</th>
+                <th>다운로드 링크</th>
                 </thead>
                 <tbody>
                 {% for object in object_list %}
@@ -25,7 +25,7 @@
                     </tr>
                 {% empty %}
                     <tr>
-                        <td colspan="3">No Orders Yet.</td>
+                        <td colspan="3">구매내역 없음</td>
                     </tr>
                 {% endfor %}
                 </tbody>
