@@ -179,15 +179,15 @@ PROTECTED_ROOT = os.path.join(BASE_DIR, "media_root", "protected_media")
 
 from ecomm.aws.conf import *
 
-CORS_REPLACE_HTTPS_REFERER = False
-HOST_SCHEME = "http://"
-SECURE_PROXY_SSL_HEADER = None
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-SECURE_HSTS_SECONDS = None
-SECURE_HSTS_INCLUDE_SUBDOMAINS = False
-SECURE_FRAME_DENY = False
+    # CORS_REPLACE_HTTPS_REFERER = False
+    # HOST_SCHEME = "http://"
+    # SECURE_PROXY_SSL_HEADER = None
+    # SECURE_SSL_REDIRECT = False
+    # SESSION_COOKIE_SECURE = False
+    # CSRF_COOKIE_SECURE = False
+    # SECURE_HSTS_SECONDS = None
+    # SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+    # SECURE_FRAME_DENY = False
 
 
 # 1,200초(20분) 세션 타임아웃 설정

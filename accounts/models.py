@@ -176,9 +176,9 @@ class EmailActivation(models.Model):
 
         if not self.activated and not self.forced_expired:
             if self.key:
-                base_url = getattr(settings, 'BASE_URL', '')
+                base_url = getattr(settings, 'BASE_URL', '')[:-1]
                 key_path = reverse("accounts:email_activate", kwargs={'key': self.key})
-                path = f"http://{base_url}{key_path}"
+                path = f"https://{base_url}{key_path}"
                 context = {
                     'path': path,
                     'email': self.user.email

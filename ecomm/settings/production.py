@@ -40,8 +40,6 @@ DEFAULT_FROM_MAIL = 'chadolskii123'
 
 BASE_URL = "chadolskii-ecomm.herokuapp.com/"
 
-
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,8 +66,10 @@ INSTALLED_APPS = [
     'tags',
     'widget_tweaks',
     'xhtml2pdf',
+    'django.contrib.humanize',
 
 ]
+
 
 AUTH_USER_MODEL = 'accounts.User'  # changes the built-in user model to ours
 
