@@ -67,6 +67,7 @@ INSTALLED_APPS = [
     'storages',
     'tags',
     'widget_tweaks',
+    'xhtml2pdf',
 
 ]
 
