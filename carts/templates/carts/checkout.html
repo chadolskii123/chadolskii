@@ -53,6 +53,7 @@
             {% if not has_card %}
                 <!-- enter credit card here -->
                 <h3 class="pt-3">카드 등록하기</h3>
+                <h4>카드 넘버는 꼭 4242-4242-4242-4242로 해주세요<h4>
                 <div class="stripe-payment-form" method="post" id="payment-form"
                      data-token="{{ publish_key }}"
                      data-next-url="{{ request.build_absolute_uri }}" data-btn-title="Add Payment Method">
