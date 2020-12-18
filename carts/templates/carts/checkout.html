@@ -3,14 +3,14 @@
 {% load static %}
 {% block content %}
     {% if not billing_profile %}
-        <div class="row text-left">
-            <div class="col-6 col-md-6" style="minimum-width:6rem;">
+        <div class="row">
+            <div class="col-4 mx-auto" >
                 {% include "accounts/snippets/form.html" with form=login_form next_url=request.build_absolute_uri form_purpose='로그인하기' %}
             </div>
-            <div class="col-6 col-md-6" style="minimum-width:6rem;">
+            {% comment %} <div class="col-6" >
                 {% url "guest_register" as guest_register_url %}
                 {% include "accounts/snippets/form.html" with form=guest_form next_url=request.build_absolute_uri action_uri=guest_register_url  form_purpose='게스트로 진행하기' %}
-            </div>
+            </div> {% endcomment %}
         </div>
     {% else %}
         {% if not object.shipping_address and shipping_address_required %}

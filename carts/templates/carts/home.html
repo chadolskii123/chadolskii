@@ -2,6 +2,7 @@
 {% load humanize %}
 {% block content %}
     <h1>카트</h1>
+    <div class="col-8 mx-auto">
     {% if cart.products.exists %}
         <table class="table cart-table">
             <thead>
@@ -43,5 +44,5 @@
     {% else %}
         <p class="lead">카트가 비어있습니다.</p>
     {% endif %}
-
+</div>
 {% endblock %}
