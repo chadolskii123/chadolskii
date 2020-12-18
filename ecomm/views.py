@@ -1,8 +1,9 @@
 from django.contrib.auth import authenticate, login, get_user_model
-
+from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from products.models import Product
+from django.core.mail import send_mail
 from .forms import ContactForm
 
 
@@ -32,14 +33,23 @@ def about_page(request):
 def contact_page(request):
     contact_form = ContactForm(request.POST or None)
     context = {
-        "title": "Contact Page!",
-        "content": "welcome to the contact page",
+        "title": "건의 사항",
+        "content": "",
         "form": contact_form,
     }
 
     if contact_form.is_valid():
         if request.is_ajax():
-            return JsonResponse({"message": "Thank you for your submission"})
+            subject = request.POST.get('fullname')+" / " + request.POST.get("email")
+            message = request.POST.get('content')
+            sent_mail = send_mail(subject=subject, message =message, from_email = settings.EMAIL_HOST_USER, recipient_list=settings.EMAIL_HOST_USER, fail_silently=True)
+            
+            if sent_mail :
+                msg = {"message" : "확인 후 연락 드리겠습니다."}
+            else :
+                msg = {"message" : "죄송합니다. 전송 실패하였습니다."}
+
+            return JsonResponse(msg)
 
     if contact_form.errors:
         errors = contact_form.errors.as_json()

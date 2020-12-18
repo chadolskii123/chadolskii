@@ -20,16 +20,12 @@ def checkout_address_create_view(request):
         instance = form.save(commit=False)
         billing_profile, billing_profile_created = BillingProfile.objects.new_or_get(request)
         if billing_profile is not None:
-            address_obj = Address.objects.filter(address_line_1=request.POST.get('address_line_1'))
-            if address_obj is None:
-                address_type = request.POST.get('address_type', 'shipping')
-                instance.billing_profile = billing_profile
-                instance.address_type = address_type
-                instance.save()
-                request.session[address_type + "_address_id"] = instance.id
-            else:
-                address_type = request.POST.get('address_type', 'shipping')
-                request.session[address_type + "_address_id"] = address_obj.id
+            address_type = request.POST.get('address_type', 'shipping')
+            instance.billing_profile = billing_profile
+            instance.address_type = address_type
+            instance.save()
+            request.session[address_type + "_address_id"] = instance.id
+        
         else:
             redirect("cart:checkout")
 

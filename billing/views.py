@@ -42,5 +42,5 @@ def payment_method_createview(request):
             # new_card_obj = Card.objects.add_new(billing_profile=billing_profile, stripe_card_response=card_response)
             new_card_obj = Card.objects.add_new(billing_profile=billing_profile, token=token)
 
-        return JsonResponse({"message": "Success your Card is added"})
+        return JsonResponse({"message": "카드가 정상적으로 추가되었습니다."})
     return HttpResponse("error", status_code=401)

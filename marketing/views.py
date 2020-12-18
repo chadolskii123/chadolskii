@@ -17,7 +17,7 @@ class MarketingPreferenceUpdateView(SuccessMessageMixin, UpdateView):
     form_class = MarketingPreferenceForm
     template_name = 'base/forms.html'
     success_url = '/settings/email/'
-    success_message = "Your email preferences has been updated"
+    success_message = "저장되었습니다."
 
     def dispatch(self, *args, **kwargs):
         user = self.request.user
@@ -27,7 +27,7 @@ class MarketingPreferenceUpdateView(SuccessMessageMixin, UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(MarketingPreferenceUpdateView, self).get_context_data(*args, **kwargs)
-        context['title'] = 'Update Email Preferences'
+        context['title'] = '마케팅 메일 수신 동의 내용 변경'
         return context
 
     def get_object(self):

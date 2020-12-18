@@ -30,7 +30,7 @@
                 </div>
             </div>
         {% elif not object.billing_address %}
-            <div class="row mt-3">
+            <div class="row mt-3 col-8">
                 <div class="col-12">
                     <p class="lead">구매자 주소</p>
                     <hr/>
@@ -41,7 +41,7 @@
                 </div>
                 {% url "checkout_address_reuse" as checkout_address_reuse %}
                 <div class="col-4 text-left"  style="border: 1px solid #cfcfd0; background: #f8f8f9;border-radius: 3px;">
-                    <h3>기존 사용 주소</h3>
+                    <h3 class="text-center">기존 사용 주소</h3>
                     {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_uri=checkout_address_reuse %}
                 </div>
             </div>
