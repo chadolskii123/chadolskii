@@ -24,10 +24,12 @@
                     {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='shipping' %}
                 </div>
                 {% url "checkout_address_reuse" as checkout_address_reuse %}
-                <div class="col-4 text-left pt-3"  style="border: 1px solid #cfcfd0; background: #f8f8f9;  border-radius: 3px;">
-                    <h3 class="text-center">기존 사용 주소</h3>
-                    {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_uri=checkout_address_reuse %}
-                </div>
+                {% if address_qs %}
+                    <div class="col-4 text-left pt-3"  style="border: 1px solid #cfcfd0; background: #f8f8f9;  border-radius: 3px;">
+                        <h3 class="text-center">기존 사용 주소</h3>
+                        {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='shipping' action_uri=checkout_address_reuse %}
+                    </div>
+                {% endif %}
             </div>
         {% elif not object.billing_address %}
             <div class="row mt-3 col-8">
@@ -40,10 +42,12 @@
                     {% include "addresses/form.html" with form=address_form next_url=request.build_absolute_uri action_uri=checkout_address_create address_type='billing' %}
                 </div>
                 {% url "checkout_address_reuse" as checkout_address_reuse %}
-                <div class="col-4 text-left"  style="border: 1px solid #cfcfd0; background: #f8f8f9;border-radius: 3px;">
-                    <h3 class="text-center">기존 사용 주소</h3>
-                    {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_uri=checkout_address_reuse %}
-                </div>
+                  {% if address_qs %}
+                    <div class="col-4 text-left"  style="border: 1px solid #cfcfd0; background: #f8f8f9;border-radius: 3px;">
+                        <h3 class="text-center">기존 사용 주소</h3>
+                        {% include "addresses/prev_address.html" with address_qs=address_qs next_url=request.build_absolute_uri address_type='billing' action_uri=checkout_address_reuse %}
+                    </div>
+                {% endif %}
             </div>
         {% else %}
             {% if not has_card %}
