@@ -4,12 +4,12 @@
     <div class='row'>
         <div class='col'>
             <h1>{{ object.title }}</h1><br/>
-            {{ object.timestamp|timesince }} ago
+            {{ object.timestamp|timesince }} 전
             {{ object.description|linebreaks }}<br/>
             {% if object.image %}
                 <img src="{{ object.image.url }}" class='img-fluid'/><br/>
             {% else %}
-                No Images found
+                이미지X
             {% endif %}
         </div>
         <div class='col-12 col-md-6'>

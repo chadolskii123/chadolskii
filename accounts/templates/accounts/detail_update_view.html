@@ -13,8 +13,8 @@
             <label for="email">이메일</label>
             <input type="text" id="email" class="disabled form-control" value="{{ request.user.email }}" disabled/>
             <span class="help-text" style="color:darkgrey;">이메일은 변경 할 수 없습니다.</span><br/><br/>
-            <button type="submit" class="btn btn-secondary">Save</button>
-            <a href="{% url 'password_change' %}">Change Password</a>
+            <button type="submit" class="btn btn-secondary">저장</button>
+            <a href="{% url 'password_change' %}">비밀번호 변경</a>
         </form>
     </div>
 {% endblock %}

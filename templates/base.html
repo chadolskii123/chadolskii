@@ -18,7 +18,7 @@
         <div class="alert alert-success messages">
             {% for message in messages %}
                 <span{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}중요: {% endif %}
                     {{ message }}<br/>
                 </span>
             {% endfor %}
