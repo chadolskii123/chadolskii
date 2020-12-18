@@ -13,5 +13,5 @@
 일반적인 사용자의 경우는 아이템들을 보여준다.
 {% endcomment %}
 {% block content %}
-    {% include 'products/snippets/list.html'%}
+    {% include 'products/snippets/list.html' with object_list=object_list%}
 {% endblock %}
