@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     'storages',
     'tags',
     'widget_tweaks',
-    'xhtml2pdf',
+    # 'xhtml2pdf',
     'django.contrib.humanize',
 
 ]
