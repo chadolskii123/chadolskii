@@ -17,6 +17,7 @@ def home_page(request):
             return redirect("sales_analytics")
     else :
         return render(request, 'home_page.html', context)
+    return render(request, 'home_page.html', context)
 
 
 def juso_page(request):

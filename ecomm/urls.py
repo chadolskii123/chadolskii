@@ -31,7 +31,7 @@ from orders.views import LibraryView
 from .views import home_page, about_page, contact_page, juso_page, introduce_page
 
 urlpatterns = [
-                  path(r'', home_page, name='home'),
+                  path('', home_page, name='home'),
                   path('juso/', juso_page, name='juso'),
                   path('about/', about_page, name='about'),
                   path('introduce/', introduce_page, name='introduce'),
